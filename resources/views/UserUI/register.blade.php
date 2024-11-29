@@ -104,7 +104,7 @@
 
 
                                         <div class="mt-4">
-                                            <button class="btn btn-success w-100" type="submit">Sign Up</button>
+                                            <button class="btn btn-success w-100" id="submit" type="submit">Sign Up</button>
                                         </div>
 
                                         <div class="mt-4 text-center">
