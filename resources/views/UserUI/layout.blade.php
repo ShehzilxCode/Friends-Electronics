@@ -99,7 +99,7 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <a href="/my-account" aria-label="My Account">
+                                        <a href="{{route('users.register')}}" aria-label="My Account">
                                             <i class="lastudioicon-single-01-2"></i>
                                         </a>
                                     </li>

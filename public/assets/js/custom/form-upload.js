@@ -7,7 +7,7 @@
  * @param {string} redirectUrl - The URL to redirect to after a successful form submission.
  * @param {number} timer - Optional, time in milliseconds to show success/error notifications. Default is 3000 ms.
  */
-function handleFormUploadForm(formMethod, formId, btnId, targetUrl, redirectUrl, timer = 3000) {
+function handleFormUploadForm(formMethod, formId, btnId, targetUrl, redirectUrl, timer = 2000) {
   // Disable the submit button and show the spinner
   $(btnId).prop("disabled", true);
   $(btnId).html('<span class="spinner-border spinner-border-sm"></span> Processing...');
