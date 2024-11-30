@@ -89,7 +89,7 @@
                 '#register-form',
                 '#submit',
                 "{{ route('auth.register') }}",
-                "{{ route('users.login') }}"
+                "{{ route('users.verifyotp') }}"
 
             );
         });

@@ -44,4 +44,5 @@ Route::prefix('admin')->group(function () {
 Route::controller(UserController::class)->prefix('users')->group(function (){
     Route::get('/login', 'login')->name('users.login'); // User Login
     Route::get('/register', 'register')->name('users.register'); // User Register
+    Route::get('/verify-otp', 'verifyotp')->name('users.verifyotp'); // User Verify-OTP
 });

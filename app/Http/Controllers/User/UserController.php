@@ -16,5 +16,7 @@ class UserController extends Controller
         return view('UserUI.login');
     }
     
-
+    public function verifyotp(){
+        return view('UserUI.otp');
+    }
 }
