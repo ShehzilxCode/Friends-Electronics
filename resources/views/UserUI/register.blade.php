@@ -128,7 +128,7 @@
                         <!-- end card -->
 
                         <div class="mt-4 text-center">
-                            <p class="mb-0">Already have an account ? <a href="auth-signin-basic.html" class="fw-semibold text-primary text-decoration-underline"> Signin </a> </p>
+                            <p class="mb-0">Already have an account ? <a href="{{ route('users.login') }}" class="fw-semibold text-primary text-decoration-underline"> Signin </a> </p>
                         </div>
 
                     </div>
