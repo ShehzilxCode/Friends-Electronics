@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\VerificationCodeMail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -31,7 +33,7 @@ class AuthController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => ['required', 'min:8'],
-                'role' => 'required|integer|in:1,2,3',
+                'role' => 'required|integer|in:1,2',
             ]);
 
             // If validator fails
@@ -47,17 +49,25 @@ class AuthController extends Controller
             }
             // Create a new user
 
-            User::create([
+
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'role' => $request->role
-            
+                'role' => $request->role,
+                'verification_code' => null
             ]);
+
+            $code = rand(1000, 9999);
+            $user->verification_code = $code;
+            $user->save();
+    
+            Log::info("Generated Verification Code: $code"); 
+            Mail::to($user->email)->send(new VerificationCodeMail($code));
 
             return response()->json([
                 'status'=>'success',
-                'message'=>'User created successfully'
+                'message'=>'Verification OTP sent to your email'
             ],200
         );
             
@@ -69,5 +79,32 @@ class AuthController extends Controller
                 'data' => null,
             ]);
         }
+    }
+
+    public function verifyotp(Request $request){
+        try {
+            $validator = Validator::make($request->all(), [
+                'otp' => 'required|numeric',
+                'role' => 'required|integer|in:1,2,3',
+
+            ]);
+        
+            // If validation fails, return error response
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'warning',
+                    'message' => $validator->errors()->first(),
+                ], 404);
+            }
+
+
+        }
+        catch(\Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => null,
+            ]);
+        };
     }
 }

@@ -19,4 +19,8 @@ class UserController extends Controller
     public function verifyotp(){
         return view('UserUI.otp');
     }
+
+    public function verificationcode(){
+        return view('emails.verification_code');
+    }
 }
