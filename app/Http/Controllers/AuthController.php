@@ -55,21 +55,26 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
-                'verification_code' => null
+                'verification_code' => null,
+                'otp_expires_at' => null
             ]);
 
             $code = rand(1000, 9999);
+            $codeExpiration = now()->addMinutes(5);
+
             $user->verification_code = $code;
+            $user->otp_expires_at = $codeExpiration;
             $user->save();
     
             Log::info("Generated Verification Code: $code"); 
-            Mail::to($user->email)->send(new VerificationCodeMail($code));
+            Mail::to($user->email)->send(new VerificationCodeMail($code, $codeExpiration));
 
             return response()->json([
-                'status'=>'success',
-                'message'=>'Verification OTP sent to your email'
-            ],200
-        );
+                'status' => 'success',
+                'message' => 'Verification OTP sent to your email',
+                'redirect_url' => route('users.verifyotp', ['email' => $user->email]),
+            ], 200);
+            
             
         }
         catch(\Exception $e) {
@@ -81,30 +86,117 @@ class AuthController extends Controller
         }
     }
 
-    public function verifyotp(Request $request){
+    public function verifyotp(Request $request)
+    {
         try {
+            // Validate the OTP and role
             $validator = Validator::make($request->all(), [
-                'otp' => 'required|numeric',
-                'role' => 'required|integer|in:1,2,3',
-
+                'otp' => 'required|array|min:4|max:4',  // Ensure OTP is an array of 4 digits
+                'role' => 'required|integer|in:1,2',   // Validate role
             ]);
-        
-            // If validation fails, return error response
+            
+            // If validation fails, return an error response
             if ($validator->fails()) {
                 return response()->json([
                     'status' => 'warning',
                     'message' => $validator->errors()->first(),
                 ], 404);
             }
+    
+            // Convert the OTP array into a string
+            $otp = implode('', $request->input('otp'));
 
-
+            $email = $request->email;
+    
+            // Fetch the user using the email from the session
+            $user = User::where('email', $email)->first();
+    
+            // Handle case where user is not found
+            if (!$user) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'User not found with the provided email',
+                ], 404);
+            }
+    
+            // Check if the verification code matches
+            if ($user->verification_code == $otp) {
+                // Check if OTP has expired
+                if (now()->greaterThan($user->otp_expires_at)) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'OTP has expired. Please request a new one.',
+                    ], 400);
+                }
+    
+                // Mark OTP as verified and update user status if needed
+                $user->verification_code = null;  // Invalidate OTP after successful verification
+                $user->email_verified_at = now(); // Optionally set email verification timestamp
+                $user->save();
+    
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'OTP verified successfully. Proceeding to login.',
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid OTP. Please try again.',
+                ], 400);
+            }
+    
+        } catch (\Exception $e) {
+            // Handle exceptions and return an error response
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => null,
+            ], 500);
         }
-        catch(\Exception $e){
+    }
+    public function login(Request $req){
+        try{
+           $validator = Validator::make($req->all(),[
+            'email'=>'required | email',
+            'password'=>'required'
+           ]) ;
+           if($validator->fails()){
+            return response()->json([
+                'status'=>'warning',
+                'message'=>$validator->errors()->first(),
+            ],404);
+           }
+         if(Auth::attempt(['email' => $req->email, 'password' => $req->password ])){
+            $user = Auth::user();
+            if($user->role == 1 && $user->email_verified_at != null){
+                return response()->json([
+                    'status ' => 'success',
+                    'message' => 'User Logged In Successfully',
+                    'data' => null
+                ],);
+            }
+            else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' =>'Admin Logged in Successfully',
+                    'data' => null,
+                ]);
+            }
+         }
+         else{
+            return response()->json([
+                'status' => 'error',
+                'message' =>'The provided credentials do not match our records.',
+                'data' => null,
+            ]);
+         }
+
+        }catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
                 'data' => null,
             ]);
-        };
+        }
     }
 }

@@ -15,13 +15,15 @@ class VerificationCodeMail extends Mailable
     use Queueable, SerializesModels;
 
     public $code;
+    public $codeExpiration;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($code)
+    public function __construct($code, $codeExpiration)
     {
         $this->code = $code;
+        $this->codeExpiration = $codeExpiration;
     }
 
     // /**
@@ -53,6 +55,7 @@ class VerificationCodeMail extends Mailable
         return $this->view('emails.verification_code')
                     ->with([
                         'code' => $this->code,
+                        'codeExpiration' => $this->codeExpiration
                     ])
                     ->subject('Verification Code Mail');
     }

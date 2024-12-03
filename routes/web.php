@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('auth.login');
     Route::post('/register', 'register')->name('auth.register');
+    Route::post('/verify-otp', 'verifyotp')->name('auth.verifyotp');
 });
 
 // Website Routes
@@ -46,17 +47,3 @@ Route::controller(UserController::class)->prefix('users')->group(function (){
     Route::get('/register', 'register')->name('users.register'); // User Register
     Route::get('/verify-otp', 'verifyotp')->name('users.verifyotp'); // User Verify-OTP
 });
-
-// Route::get('/test-email', function () {
-//     $data = [
-//         'view' => 'emails.test',
-//         'from' => env('MAIL_FROM_ADDRESS'),
-//         'subject' => 'Test Email',
-//         'user' => 'Test User',
-//         'otpduration' => 5, // Example data
-//     ];
-
-//     Mail::to('recipient@example.com')->send(new \App\Mail\OtpMail($data));
-
-//     return 'Test email sent!';
-// });

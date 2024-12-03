@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Verification Code</title>
+    <title>OTP</title>
 </head>
 <body>
-    <h1>Your Verification Code</h1>
-    <p>Your verification code is: <strong>{{ $code }}</strong></p>
+    <h1>OTP</h1>
+    <p>Your OTP is: <strong>{{ $code }}</strong></p>
+    <p>This OTP is valid for <strong>{{ $codeExpiration }} minutes</strong>.</p>
 </body>
 </html>

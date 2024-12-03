@@ -21,7 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'verification_code  ',
+        'otp_expires_at'
     ];
 
     /**

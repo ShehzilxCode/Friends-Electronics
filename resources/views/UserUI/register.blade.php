@@ -84,14 +84,18 @@
     $(document).ready(function(){
         $('#register-form').on('submit', function(e){
             e.preventDefault();
+
+            const formData = new FormData(this);
+            const email = formData.get('email');
+
             handleFormUploadForm(
                 'POST',
                 '#register-form',
                 '#submit',
                 "{{ route('auth.register') }}",
-                "{{ route('users.verifyotp') }}"
-
-            );
+                "{{ route('users.verifyotp') }}?email=" + encodeURIComponent(email)
+    );
+            
         });
     });
 </script>
