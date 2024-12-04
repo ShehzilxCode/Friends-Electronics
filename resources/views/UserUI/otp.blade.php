@@ -29,53 +29,47 @@
                                     <label for="digit1-input" class="visually-hidden">Digit 1</label>
                                     <input type="text" class="form-control form-control-lg bg-light border-light text-center" onkeyup="moveToNext(1, event)" maxLength="1" id="digit1-input" name="otp[0]">
                                 </div>
-                            </div><!-- end col -->
-                    
+                            </div>
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="digit2-input" class="visually-hidden">Digit 2</label>
                                     <input type="text" class="form-control form-control-lg bg-light border-light text-center" onkeyup="moveToNext(2, event)" maxLength="1" id="digit2-input" name="otp[1]">
                                 </div>
-                            </div><!-- end col -->
-                    
+                            </div>
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="digit3-input" class="visually-hidden">Digit 3</label>
                                     <input type="text" class="form-control form-control-lg bg-light border-light text-center" onkeyup="moveToNext(3, event)" maxLength="1" id="digit3-input" name="otp[2]">
                                 </div>
-                            </div><!-- end col -->
-                    
+                            </div>
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="digit4-input" class="visually-hidden">Digit 4</label>
                                     <input type="text" class="form-control form-control-lg bg-light border-light text-center" onkeyup="moveToNext(4, event)" maxLength="1" id="digit4-input" name="otp[3]">
                                 </div>
-                            </div><!-- end col -->
+                            </div>
                         </div>
                     
-
-                    <div class="mt-3">
-                        <button class="btn btn-success w-100" type="submit" id="submit" >Confirm</button>
+                        <div class="mt-3">
+                            <button class="btn btn-success w-100" type="submit" id="submit">Confirm</button>
+                        </div>
+                    </form>
+                    <div id="timer-container" class="text-center text-danger fw-bold fs-5 mt-3">
+                        <span id="timer"></span>
+                        <span id="otp-expired-text" style="display: none;">OTP expired. Please request a new code.</span>
                     </div>
-                </form><!-- end form -->
-                <div id="timer" class="text-center text-danger fw-bold fs-5 mt-3">2:00</div>
                 </div>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
-
         <div class="mt-4 text-center">
-            <a href="auth-pass-reset-basic.html" class="fw-semibold text-primary text-decoration-underline">Resend</a>
+            <a href="auth-pass-reset-basic.html" id="resend-link" class="fw-semibold text-primary text-decoration-underline" style="display: none;">Resend</a>
         </div>
-
     </div>
 </div>
 @endsection
 
 @push('scripts')
 <script>
-
 document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email');
@@ -86,32 +80,62 @@ document.addEventListener('DOMContentLoaded', function () {
 
 $('#verifyOtpForm').on('submit', function (e) {
     e.preventDefault();
-
     handleFormUploadForm(
         'POST',
         '#verifyOtpForm',
         '#submit',
         "{{ route('auth.verifyotp') }}",
-        "{{ route('users.login') }}",
+        "{{ route('users.login') }}"
     );
 });
 
 document.addEventListener('DOMContentLoaded', function () {
     // Existing code for the timer
     const timerElement = document.getElementById('timer');
-    let remainingTime = 2 * 60; // 2 minutes in seconds
+    const resendLink = document.getElementById('resend-link');
+    const otpExpiredText = document.getElementById('otp-expired-text');
+    const OTP_EXPIRATION_TIME = 2 * 60 * 1000; // 2 minutes in milliseconds
+    const TIMER_KEY = "otpTimerStart"; // Key for localStorage
 
-    function updateTimer() {
-        const minutes = Math.floor(remainingTime / 60);
-        const seconds = remainingTime % 60;
-        timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    function startTimer() {
+        const startTime = Date.now();
+        localStorage.setItem(TIMER_KEY, startTime); // Save start time
+        updateTimer(startTime);
+    }
 
-        if (remainingTime > 0) {
-            remainingTime--;
+    function updateTimer(startTime) {
+        const timerInterval = setInterval(() => {
+            const elapsedTime = Date.now() - startTime;
+            const remainingTime = OTP_EXPIRATION_TIME - elapsedTime;
+
+            if (remainingTime > 0) {
+                const minutes = Math.floor(remainingTime / 60000);
+                const seconds = Math.floor((remainingTime % 60000) / 1000);
+                timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            } else {
+                clearInterval(timerInterval);
+                timerElement.style.display = "none";
+                otpExpiredText.style.display = "inline";
+                resendLink.style.display = "block";
+                localStorage.removeItem(TIMER_KEY); // Remove timer key
+            }
+        }, 1000);
+    }
+
+    // Check if the timer has already started
+    const savedStartTime = localStorage.getItem(TIMER_KEY);
+    if (savedStartTime) {
+        const elapsedTime = Date.now() - parseInt(savedStartTime, 10);
+        if (elapsedTime >= OTP_EXPIRATION_TIME) {
+            timerElement.style.display = "none";
+            otpExpiredText.style.display = "inline";
+            resendLink.style.display = "block";
+            localStorage.removeItem(TIMER_KEY); // Clear expired timer
         } else {
-            clearInterval(timerInterval);
-            timerElement.textContent = "OTP expired. Please request a new code.";
+            updateTimer(parseInt(savedStartTime, 10)); // Continue timer
         }
+    } else {
+        startTimer(); // Start a new timer
     }
 });
 
