@@ -66,7 +66,7 @@
         <!-- end card -->
 
         <div class="mt-4 text-center">
-            <a href="auth-pass-reset-basic.html" class="fw-semibold text-primary text-decoration-underline">Resend</a
+            <a href="auth-pass-reset-basic.html" class="fw-semibold text-primary text-decoration-underline">Resend</a>
         </div>
 
     </div>
@@ -97,6 +97,7 @@ $('#verifyOtpForm').on('submit', function (e) {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Existing code for the timer
     const timerElement = document.getElementById('timer');
     let remainingTime = 2 * 60; // 2 minutes in seconds
 
@@ -112,9 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
             timerElement.textContent = "OTP expired. Please request a new code.";
         }
     }
-
-    const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer(); // Initial display
 });
+
 </script>
 @endpush

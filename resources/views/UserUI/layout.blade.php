@@ -31,6 +31,29 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.min.css" />
+    <style>
+
+
+.footer-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-link__wrapper {
+    flex: 1; /* Allows equal distribution */
+    padding: 0 15px; /* Optional padding for spacing */
+}
+
+.footer-link__links {
+    margin-right: 20px; /* Optional: Adjusts space between sections */
+}
+
+.footer-link__contact {
+    margin-left: 20px; /* Optional: Adjusts space between sections */
+}
+
+    </style>
 </head>
 
 
@@ -69,7 +92,7 @@
                                 <li>
                                     <a href="mailto:info.expmale@mail.com" aria-label="mail">
                                         <i class="lastudioicon-mail-2"></i>
-                                        <span>info.expmale@mail.com</span>
+                                        <span>shehziluhm@gmail.com</span>
                                     </a>
                                 </li>
                                 <li>
@@ -81,7 +104,7 @@
                                 <li>
                                     <a href="#" aria-label="map">
                                         <i class="lastudioicon-pin-3-1"></i>
-                                        <span>Los Angeles</span>
+                                        <span>Karachi,Pakistan</span>
                                     </a>
                                 </li>
                             </ul>
@@ -104,7 +127,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/wishlist" aria-label="Wishlist">
+                                        <a href="{{ route('user.wishlist') }}" aria-label="Wishlist">
                                             <i class="lastudioicon-heart-2"></i>
                                             <span class="badge">03</span>
                                         </a>
@@ -141,23 +164,23 @@
                     <!-- Menu Item List Start -->
                     <ul class="menu-items-list menu-items-list--2 justify-content-center d-flex">
                         <li>
-                            <a class="active" href="/">
-                                HOME 
+                            <a class="active" href="{{ route('user.home') }}">
+                                HOME
                             </a>
-                        
+
                         </li>
                         <li>
-                            <a href="/shop">SHOP </a>             
+                            <a href="{{ route('user.shop') }}">SHOP </a>
                         </li>
                         <li class="position-static">
-                             <a href="/about">ABOUT </a>
-                            
+                             <a href="{{ route('user.about') }}">ABOUT </a>
+
                         </li>
                         <li class="position-static">
-                            <a href="/contact">CONTACT </a>
-                      
+                            <a href="{{ route('user.contact') }}">CONTACT </a>
+
                         </li>
-                     
+
 
                     </ul>
                     <!-- Menu Item List End -->
@@ -344,8 +367,8 @@
 
             <!-- Cart Buttons End-->
             <div class="cart-buttons">
-                <a href="/checkout" class="cart-buttons__btn-1 btn">Checkout</a>
-                <a href="/cart" class="cart-buttons__btn-2 btn">View Cart</a>
+                <a href="{{ route('user.checkout') }}" class="cart-buttons__btn-1 btn">Checkout</a>
+                <a href="{{ route('user.cart') }}" class="cart-buttons__btn-2 btn">View Cart</a>
             </div>
             <!-- Cart Buttons End-->
         </div>
@@ -380,82 +403,7 @@
 
     <!-- Search End -->
 
-    <!-- Offcanvas Menu Start -->
-    <div class="offcanvas offcanvas-end offcanvas-sidebar" tabindex="-1" id="offcanvasSidebar">
-        <button type="button" class="offcanvas-sidebar__close" data-bs-dismiss="offcanvas" aria-label="remove">
-            <i class="lastudioicon-e-remove"></i>
-        </button>
-        <div class="offcanvas-body">
-            <!-- Off Canvas Sidebar Menu Start -->
-            <div class="offcanvas-sidebar__menu">
-                <ul class="offcanvas-menu-list">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="blog.html">News & Events</a></li>
-                    <li><a href="faqs.html">FAQs</a></li>
-                    <li><a href="contact-us.html">Contact Us</a></li>
-                </ul>
-            </div>
-            <!-- Off Canvas Sidebar Menu End -->
 
-            <!-- Off Canvas Sidebar Banner Start -->
-            <div class="offcanvas-sidebar__banner" style="
-                background-image: url(assets/images/shop-sidebar-banner.jpg);
-            ">
-                <h3 class="banner-title">NEW NOW</h3>
-                <h4 class="banner-sub-title">WARM WOOL PREMIUM COAT</h4>
-                <a href="#" class="banner-btn">Discover</a>
-            </div>
-            <!-- Off Canvas Sidebar Banner End -->
-
-            <!-- Off Canvas Sidebar Info Start -->
-            <div class="offcanvas-sidebar__info">
-                <ul class="offcanvas-info-list">
-                    <li><a href="tel:+61225315600">(+612) 2531 5600</a></li>
-                    <li><a href="mailto:info@exmple.com">info@exmple.com</a></li>
-                    <li>
-                        <span>
-                        PO Box 1622 Colins Street West Victoria 8077 Australia
-                    </span>
-                    </li>
-                </ul>
-            </div>
-            <!-- Off Canvas Sidebar Info End -->
-
-            <!-- Off Canvas Sidebar Social Start -->
-            <div class="offcanvas-sidebar__social">
-                <ul class="offcanvas-social">
-                    <li>
-                        <a href="#" aria-label="facebook">
-                            <i class="lastudioicon-b-facebook"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="twitter">
-                            <i class="lastudioicon-b-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="instagram">
-                            <i class="lastudioicon-b-instagram"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Off Canvas Sidebar Social End -->
-
-            <!-- Off Canvas Sidebar Social End -->
-            <div class="offcanvas-sidebar__copyright">
-                <p>
-                    &copy;
-                    <span class="current-year">2023</span>
-                    <span> Plantfy </span> Made with by
-                    <a href="https://hasthemes.com/">HasThemes</a>
-                </p>
-            </div>
-            <!-- Off Canvas Sidebar Social End -->
-        </div>
-    </div>
 
     <!-- Offcanvas Menu End -->
 
@@ -474,235 +422,40 @@
             <nav class="navbar-mobile-menu">
                 <ul class="mobile-menu-items">
                     <li>
-                        <a href="#">
+                        <a href="{{ route('user.home') }}">
                             HOME
                             <span class="menu-expand" aria-label="down-arrow">
-                           
+
                         </span>
                         </a>
-                    
+
                     </li>
                     <li>
-                        <a href="#">
-                            Pages
+                        <a href="{{ route('user.shop') }}">
+                            SHOP
                             <span class="menu-expand" aria-label="down-arrow">
-                            <i class="lastudioicon-down-arrow"></i>
                         </span>
                         </a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                            <li><a href="our-team.html">Our Team</a></li>
-                            <li><a href="contact-us.html">Contact Us</a></li>
-                            <li><a href="faqs.html">FAQ's</a></li>
-                            <li><a href="term-of-use.html">term of use</a></li>
-                            <li><a href="404.html">404 Page</a></li>
-                            <li>
-                                <a href="login-register.html">Login & Register</a>
-                            </li>
-                        </ul>
+
                     </li>
                     <li>
-                        <a href="#">
-                            Shop
+                        <a href="{{ route('user.about') }}">
+                            ABOUT
                             <span class="menu-expand" aria-label="down-arrow">
-                            <i class="lastudioicon-down-arrow"></i>
                         </span>
                         </a>
-                        <div class="mega-menu">
-                            <div class="mega-menu-col">
-                                <h5 class="mega-menu-title">Shop Layout</h5>
-                                <ul class="">
-                                    <li>
-                                        <a href="shop-fullwidth.html">Shop Fullwidth</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-sidebar.html">Shop Sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-masonry.html">Shop Masonry</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-3-columns.html">Shop 03 Columns</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-4-columns.html">Shop 04 Columns</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu-col">
-                                <ul class="">
-                                    <li><a href="#">Featured Banner</a></li>
-                                    <li class="mega-menu-title">Hover Style</li>
-                                    <li><a href="#">Hover Style 01</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu-col">
-                                <h5 class="mega-menu-title">Shop Pages</h5>
-                                <ul class="">
-                                    <li>
-                                        <a href="my-account.html">My Account</a>
-                                    </li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li>
-                                        <a href="order-tracking.html">Order Tracking</a>
-                                    </li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="compare.html">Compare</a></li>
-                                    <li>
-                                        <a href="empty-cart.html">Cart Empty</a>
-                                    </li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="thank-you.html">Thank You</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu-col">
-                                <h5 class="mega-menu-title">Product Pages</h5>
-                                <ul class="">
-                                    <li>
-                                        <a href="product-single.html">
-                                            Product Simple
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="product-single-variable.html">
-                                            Product Variable
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="product-single-carousel.html">
-                                            Product Carousel
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="product-single-affiliate.html">
-                                            Product Affiliate
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="product-single-countdown.html">
-                                            Product CountDown
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+
                     </li>
                     <li>
-                        <a href="#">
-                            Collections
+                        <a href="{{ route('user.contact') }}">
+                            CONTACT
                             <span class="menu-expand" aria-label="down-arrow">
-                            <i class="lastudioicon-down-arrow"></i>
                         </span>
                         </a>
-                        <div class="mega-menu">
-                            <div class="mega-menu__banner">
-                                <a href="#">
-                                    <div class="mega-menu__banner--image">
-                                        <img src="assets/images/megamenu-fashion-01.jpg" alt="Fashion Banner" width="269" height="271" />
-                                    </div>
-                                    <div class="mega-menu__banner--caption">
-                                        <h4 class="caption-title">New Arrival</h4>
-                                        <p class="caption-desc">
-                                            Non curabitur gravida
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="mega-menu__content">
-                                <h4 class="mega-menu__content--title">
-                                    Summer Collection 2023
-                                </h4>
-                                <div class="d-flex flex-wrap">
-                                    <ul class="mega-menu__content--list">
-                                        <li>
-                                            <a href="#">Dresses and jumpsuits</a>
-                                        </li>
-                                        <li><a href="#">Shirts</a></li>
-                                        <li><a href="#">T-shirts and tops</a></li>
-                                        <li>
-                                            <a href="#">Jackets and Suit Jackets</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Cardigans and sweaters</a>
-                                        </li>
-                                        <li><a href="#">Sweatshirts</a></li>
-                                        <li><a href="#">Coats</a></li>
-                                    </ul>
-                                    <ul class="mega-menu__content--list">
-                                        <li><a href="#">Trousers</a></li>
-                                        <li><a href="#">Jeans</a></li>
-                                        <li><a href="#">Skirts</a></li>
-                                        <li><a href="#">Shorts</a></li>
-                                        <li>
-                                            <a href="#">Bikinis and swimsuits</a>
-                                        </li>
-                                        <li><a href="#">Sportswear</a></li>
-                                        <li>
-                                            <a href="#">Underwear and lingerie</a>
-                                        </li>
-                                        <li><a href="#">Pyjamas</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mt-auto">
-                                    <ul class="mega-menu__info">
-                                        <li><a href="#">info@exmple.com</a></li>
-                                        <li><a href="#">(626)997-4298</a></li>
-                                    </ul>
-                                    <div class="mega-menu__social">
-                                        <div class="mega-menu__social--lable">
-                                            Connect with us
-                                        </div>
-                                        <ul class="mega-menu__social--social">
-                                            <li>
-                                                <a href="#" aria-label="facebook">
-                                                    <i
-                                                    class="lastudioicon-b-facebook"
-                                                ></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" aria-label="twitter">
-                                                    <i
-                                                    class="lastudioicon-b-twitter"
-                                                ></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" aria-label="instagram">
-                                                    <i
-                                                    class="lastudioicon-b-instagram"
-                                                ></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </li>
-                    <li>
-                        <a href="#">
-                            Blog
-                            <span class="menu-expand" aria-label="down-arrow">
-                            <i class="lastudioicon-down-arrow"></i>
-                        </span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="blog-right-sidebar.html">
-                                    Blog Right Sidebar
-                                </a>
-                            </li>
-                            <li>
-                                <a href="blog-left-sidebar.html">
-                                    Blog Left Sidebar
-                                </a>
-                            </li>
-                            <li><a href="blog.html">Blog No Sidebar</a></li>
-                            <li><a href="blog-single.html">Single Post</a></li>
-                        </ul>
-                    </li>
+
+
                 </ul>
             </nav>
         </div>
@@ -720,13 +473,13 @@
                 </button>
             </li>
             <li>
-                <a href="wishlist.html" aria-label="wishlist">
+                <a href="{{ route('user.wishlist') }}" aria-label="wishlist">
                     <i class="lastudioicon-heart-1"></i>
                     <span class="badge">03</span>
                 </a>
             </li>
             <li>
-                <a href="compare.html" aria-label="compare">
+                <a href="{{ route('user.myaccount') }}" aria-label="compare">
                     <i class="lastudioicon-ic_compare_arrows_24px"> </i>
                     <span class="badge">03</span>
                 </a>
@@ -774,123 +527,63 @@
                     <!-- Footer Newsletter End -->
 
                     <!-- Footer Link Start -->
-                    <div class="footer-link">
-                        <div class="footer-link__wrapper">
-                            <h4 class="footer-title">Company links</h4>
+                 <!-- Footer Link Start -->
+<div class="footer-link">
+    <div class="footer-link__wrapper footer-link__links">
+        <h4 class="footer-title">Links</h4>
+        <ul class="footer-link__list">
+            <li>
+                <a href="{{ route('user.home') }}">
+                    HOME
+                    <span class="menu-expand" aria-label="down-arrow"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('user.shop') }}">
+                    SHOP
+                    <span class="menu-expand" aria-label="down-arrow"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('user.about') }}">
+                    ABOUT
+                    <span class="menu-expand" aria-label="down-arrow"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('user.contact') }}">
+                    CONTACT
+                    <span class="menu-expand" aria-label="down-arrow"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer-link__wrapper footer-link__contact">
+        <h4 class="footer-title">Contact</h4>
+        <ul class="footer-link__list">
+            <li>
+                <span>
+                    4517 Washington Ave. Manchester, Kentucky 39495
+                </span>
+            </li>
+            <li>
+                <a href="mailto:info@example.com">
+                    info@example.com
+                </a>
+            </li>
+            <li>
+                <a href="tel:626997-4298">(626)997-4298</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Footer Link End -->
 
-                            <ul class="footer-link__list">
-                                <li><a href="about.html">About us</a></li>
-                                <li><a href="shop-fullwidth.html">Shop</a></li>
-                                <li><a href="term-of-use.html">Help Center</a></li>
-                                <li>
-                                    <a href="term-of-use.html">
-                                        Policy &amp; Privacy
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer-link__wrapper">
-                            <h4 class="footer-title">Category</h4>
 
-                            <ul class="footer-link__list">
-                                <li><a href="shop-fullwidth.html">Man</a></li>
-                                <li><a href="shop-fullwidth.html">Woman</a></li>
-                                <li><a href="shop-fullwidth.html">Kids</a></li>
-                                <li>
-                                    <a href="shop-fullwidth.html">Accessories</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer-link__wrapper">
-                            <h4 class="footer-title">Contact</h4>
-
-                            <ul class="footer-link__list">
-                                <li>
-                                    <span>
-                                    4517 Washington Ave. Manchester, Kentucky
-                                    39495
-                                </span>
-                                </li>
-                                <li>
-                                    <a href="mailto:info@example.com">
-                                        info@example.com
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tel:626997-4298">(626)997-4298</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                     <!-- Footer Link End -->
                 </div>
             </div>
             <!-- Footer Main End -->
-
-            <!-- Footer Wrapper Start -->
-            <div class="footer-wrapper">
-                <div class="row align-items-center gy-3">
-                    <div class="col-lg-8">
-                        <!-- Footer store & social Start -->
-                        <div class="footer-store-social">
-                            <!-- Footer store Start -->
-                            <div class="footer-store">
-                                <h4 class="footer-store-social__title">
-                                    Available on
-                                </h4>
-                                <ul class="footer-store__btns">
-                                    <li>
-                                        <a href="#">
-                                            <img src="assets/images/apple-store.png" alt="Apple Store" width="130" height="38" loading="lazy" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="assets/images/google-store.png" alt="Google Store" width="130" height="38" loading="lazy" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Footer store End -->
-
-                            <!-- Footer social Start -->
-                            <div class="footer-social">
-                                <h4 class="footer-store-social__title">
-                                    Connect with us
-                                </h4>
-                                <ul class="footer-social__icon">
-                                    <li>
-                                        <a href="#" aria-label="facebook">
-                                            <i class="lastudioicon-b-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-label="twitter">
-                                            <i class="lastudioicon-b-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-label="instagram">
-                                            <i class="lastudioicon-b-instagram"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Footer social End -->
-                        </div>
-                        <!-- Footer store & social End -->
-                    </div>
-                    <div class="col-lg-4">
-                        <!-- Footer Payment Start -->
-                        <div class="footer-payment text-center text-lg-end">
-                            <img src="assets/images/footer-payment-white.png" alt="Footer Payment" width="310" height="38" loading="lazy" />
-                        </div>
-                        <!-- Footer Payment End -->
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Wrapper End -->
-
             <!-- Footer CopyRight Start -->
             <div class="footer-copyright">
                 <div class="row align-items-center">
@@ -898,21 +591,15 @@
                         <div class="text-center text-md-start">
                             <p>
                                 ©
-                                <span class="current-year">2023</span>
-                                <span> Plantfy </span> Made with
+                                <span class="current-year">2024</span>
+                                <span> Friends-Electronics </span> Made with
                                 <i class="lastudioicon-heart-1"></i>
                                 by
-                                <a href="https://hasthemes.com/">HasThemes</a>
+                                <a href="https://hasthemes.com/">Shehzil & Rabbi</a>
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <ul class="d-flex justify-content-center justify-content-md-end">
-                            <li><a href="term-of-use.html">Term of user</a></li>
-                            <li><a href="#">Payment refund</a></li>
-                            <li><a href="#">Accessibility</a></li>
-                        </ul>
-                    </div>
+                  
                 </div>
             </div>
             <!-- Footer CopyRight End -->
