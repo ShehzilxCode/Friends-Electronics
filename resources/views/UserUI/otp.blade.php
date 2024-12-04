@@ -58,6 +58,7 @@
                         <button class="btn btn-success w-100" type="submit" id="submit" >Confirm</button>
                     </div>
                 </form><!-- end form -->
+                <div id="timer" class="text-center text-danger fw-bold fs-5 mt-3">2:00</div>
                 </div>
             </div>
             <!-- end card body -->
@@ -65,7 +66,7 @@
         <!-- end card -->
 
         <div class="mt-4 text-center">
-            <p class="mb-0">Didn't receive a code ? <a href="auth-pass-reset-basic.html" class="fw-semibold text-primary text-decoration-underline">Resend</a> </p>
+            <a href="auth-pass-reset-basic.html" class="fw-semibold text-primary text-decoration-underline">Resend</a
         </div>
 
     </div>
@@ -93,6 +94,27 @@ $('#verifyOtpForm').on('submit', function (e) {
         "{{ route('auth.verifyotp') }}",
         "{{ route('users.login') }}",
     );
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const timerElement = document.getElementById('timer');
+    let remainingTime = 2 * 60; // 2 minutes in seconds
+
+    function updateTimer() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        if (remainingTime > 0) {
+            remainingTime--;
+        } else {
+            clearInterval(timerInterval);
+            timerElement.textContent = "OTP expired. Please request a new code.";
+        }
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer(); // Initial display
 });
 </script>
 @endpush

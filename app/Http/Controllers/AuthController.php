@@ -60,7 +60,7 @@ class AuthController extends Controller
             ]);
 
             $code = rand(1000, 9999);
-            $codeExpiration = now()->addMinutes(5);
+            $codeExpiration = now()->addMinutes(2);
 
             $user->verification_code = $code;
             $user->otp_expires_at = $codeExpiration;
