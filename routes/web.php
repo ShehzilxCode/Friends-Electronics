@@ -31,10 +31,10 @@ Route::controller(FUserController::class)->group(function () {
     Route::get('/thankyou', 'thankyou')->name('user.thankyou');// Thank You Page
     Route::get('/order-tracking', 'ordertracking')->name('user.ordertracking'); // Order Tracking Page
     Route::get('/404', 'page404')->name('user.page404');       // 404 Page
-    
+
 });
 
-// AdminDashboard Routes 
+// AdminDashboard Routes
 Route::prefix('admin')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('admin.dashboard'); // Admin Dashboard Page

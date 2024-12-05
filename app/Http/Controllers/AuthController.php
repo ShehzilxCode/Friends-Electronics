@@ -26,7 +26,7 @@ class AuthController extends Controller
 
 
     public function register(Request $request){
-      
+
         try {
             // Validate the request
             $validator = Validator::make($request->all(), [
@@ -65,8 +65,8 @@ class AuthController extends Controller
             $user->verification_code = $code;
             $user->otp_expires_at = $codeExpiration;
             $user->save();
-    
-            Log::info("Generated Verification Code: $code"); 
+
+            Log::info("Generated Verification Code: $code");
             Mail::to($user->email)->send(new VerificationCodeMail($code, $codeExpiration));
 
             return response()->json([
@@ -74,8 +74,8 @@ class AuthController extends Controller
                 'message' => 'Verification OTP sent to your email',
                 'redirect_url' => route('users.verifyotp', ['email' => $user->email]),
             ], 200);
-            
-            
+
+
         }
         catch(\Exception $e) {
             return response()->json([
@@ -94,7 +94,7 @@ class AuthController extends Controller
                 'otp' => 'required|array|min:4|max:4',  // Ensure OTP is an array of 4 digits
                 'role' => 'required|integer|in:1,2',   // Validate role
             ]);
-            
+
             // If validation fails, return an error response
             if ($validator->fails()) {
                 return response()->json([
@@ -102,15 +102,15 @@ class AuthController extends Controller
                     'message' => $validator->errors()->first(),
                 ], 404);
             }
-    
+
             // Convert the OTP array into a string
             $otp = implode('', $request->input('otp'));
 
             $email = $request->email;
-    
+
             // Fetch the user using the email from the session
             $user = User::where('email', $email)->first();
-    
+
             // Handle case where user is not found
             if (!$user) {
                 return response()->json([
@@ -118,7 +118,7 @@ class AuthController extends Controller
                     'message' => 'User not found with the provided email',
                 ], 404);
             }
-    
+
             // Check if the verification code matches
             if ($user->verification_code == $otp) {
                 // Check if OTP has expired
@@ -133,7 +133,7 @@ class AuthController extends Controller
                 $user->verification_code = null;  // Invalidate OTP after successful verification
                 $user->email_verified_at = now(); // Optionally set email verification timestamp
                 $user->save();
-    
+
                 return response()->json([
                     'status' => 'success',
                     'message' => 'OTP verified successfully. Proceeding to login.',
@@ -144,7 +144,7 @@ class AuthController extends Controller
                     'message' => 'Invalid OTP. Please try again.',
                 ], 400);
             }
-    
+
         } catch (\Exception $e) {
             // Handle exceptions and return an error response
             return response()->json([
