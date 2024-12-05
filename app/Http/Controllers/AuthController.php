@@ -128,7 +128,7 @@ class AuthController extends Controller
                         'message' => 'OTP has expired. Please request a new one.',
                     ], 400);
                 }
-    
+                
                 // Mark OTP as verified and update user status if needed
                 $user->verification_code = null;  // Invalidate OTP after successful verification
                 $user->email_verified_at = now(); // Optionally set email verification timestamp
@@ -199,4 +199,53 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function resendverifyotp(Request $request)
+    {
+    try{
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email', // Validate email
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $validator->errors()->first(),
+            ], 400);
+        }
+    
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
+    
+        if ($user && now()->greaterThan($user->otp_expires_at)) {
+            $code = rand(1000, 9999);
+            $codeExpiration = now()->addMinutes(2);
+    
+            $user->verification_code = $code;
+            $user->otp_expires_at = $codeExpiration;
+            $user->save();
+    
+            Log::info("Generated Verification Code: $code");
+            Mail::to($user->email)->send(new VerificationCodeMail($code, $codeExpiration));
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Verification OTP resent to your email',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Cannot resend OTP. Try again later.',
+            ], 400);
+        }
+    }
+    catch(\Exception $e){
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'data' => null
+        ], 400);
+    };
+}
+    
 }

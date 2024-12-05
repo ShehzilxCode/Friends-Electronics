@@ -62,7 +62,12 @@
             </div>
         </div>
         <div class="mt-4 text-center">
-            <a href="auth-pass-reset-basic.html" id="resend-link" class="fw-semibold text-primary text-decoration-underline" style="display: none;">Resend</a>
+            <form id="resend-form">
+                @csrf
+                <input type="hidden" name="email" id="email" value="{{ request('email') }}">
+                <button type="submit" id="resend-link" class="fw-semibold text-primary text-decoration-underline">Resend</button>
+            </form>
+            
         </div>
     </div>
 </div>
@@ -88,6 +93,23 @@ $('#verifyOtpForm').on('submit', function (e) {
         "{{ route('users.login') }}"
     );
 });
+
+$('#resend-form').on('submit', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const formData = new FormData();
+    formData.append('email', email);
+
+    handleFormUploadForm(
+        'POST',
+        '#resend-form',
+        '#resend-link',
+        "{{ route('auth.resendotp') }}",
+        "{{ route('users.verifyotp') }}?email=" + encodeURIComponent(email)
+        formData
+    );
+});
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // Existing code for the timer
