@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="mt-3">
                             <button class="btn btn-success w-100" type="submit" id="submit">Confirm</button>
                         </div>
@@ -61,9 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4 text-center">
-            <a href="auth-pass-reset-basic.html" id="resend-link" class="fw-semibold text-primary text-decoration-underline" style="display: none;">Resend</a>
-        </div>
+        
     </div>
 </div>
 @endsection
