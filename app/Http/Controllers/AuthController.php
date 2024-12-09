@@ -167,19 +167,24 @@ class AuthController extends Controller
             ],404);
            }
          if(Auth::attempt(['email' => $req->email, 'password' => $req->password ])){
+
             $user = Auth::user();
+            $redirect_url = $user->role == 2 
+            ? route('admin.dashboard') 
+            : route('user.home');
+
             if($user->role == 1 && $user->email_verified_at != null){
                 return response()->json([
                     'status ' => 'success',
                     'message' => 'User Logged In Successfully',
-                    'data' => null
+                    'redirect_url' => $redirect_url
                 ],);
             }
             else{
                 return response()->json([
                     'status' => 'success',
                     'message' =>'Admin Logged in Successfully',
-                    'data' => null,
+                    'redirect_url' => $redirect_url,
                 ]);
             }
          }
@@ -201,7 +206,7 @@ class AuthController extends Controller
     }
 
     public function resendverifyotp(Request $request)
-    {
+{
     try{
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email', // Validate email

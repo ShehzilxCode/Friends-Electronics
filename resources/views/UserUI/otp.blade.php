@@ -65,9 +65,8 @@
             <form id="resend-form">
                 @csrf
                 <input type="hidden" name="email" id="email" value="{{ request('email') }}">
-                <button type="submit" id="resend-link" class="fw-semibold text-primary text-decoration-underline">Resend</button>
+                <button type="submit" id="resend-link" style="display: none;" class="fw-semibold text-primary text-decoration-underline">Resend</button>
             </form>
-            
         </div>
     </div>
 </div>
@@ -105,27 +104,29 @@ $('#resend-form').on('submit', function (e) {
         '#resend-form',
         '#resend-link',
         "{{ route('auth.resendotp') }}",
-        "{{ route('users.verifyotp') }}?email=" + encodeURIComponent(email)
+        "{{ route('users.verifyotp') }}?email=" + encodeURIComponent(email),
         formData
     );
 });
 
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Existing code for the timer
     const timerElement = document.getElementById('timer');
     const resendLink = document.getElementById('resend-link');
     const otpExpiredText = document.getElementById('otp-expired-text');
-    const OTP_EXPIRATION_TIME = 2 * 60 * 1000; // 2 minutes in milliseconds
-    const TIMER_KEY = "otpTimerStart"; // Key for localStorage
+    const OTP_EXPIRATION_TIME = 2 * 60 * 1000;
+    const TIMER_KEY_PREFIX = "otpTimerStart_";
 
-    function startTimer() {
-        const startTime = Date.now();
-        localStorage.setItem(TIMER_KEY, startTime); // Save start time
-        updateTimer(startTime);
+    function getTimerKey(email) {
+        return TIMER_KEY_PREFIX + email;
     }
 
-    function updateTimer(startTime) {
+    function startTimer(email) {
+        const startTime = Date.now();
+        localStorage.setItem(getTimerKey(email), startTime);
+        updateTimer(email, startTime);
+    }
+
+    function updateTimer(email, startTime) { 
         const timerInterval = setInterval(() => {
             const elapsedTime = Date.now() - startTime;
             const remainingTime = OTP_EXPIRATION_TIME - elapsedTime;
@@ -134,32 +135,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 const minutes = Math.floor(remainingTime / 60000);
                 const seconds = Math.floor((remainingTime % 60000) / 1000);
                 timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                resendLink.style.display = "none";
+                otpExpiredText.style.display = "none";
             } else {
                 clearInterval(timerInterval);
                 timerElement.style.display = "none";
                 otpExpiredText.style.display = "inline";
                 resendLink.style.display = "block";
-                localStorage.removeItem(TIMER_KEY); // Remove timer key
+                localStorage.removeItem(getTimerKey(email));
             }
         }, 1000);
     }
 
-    // Check if the timer has already started
-    const savedStartTime = localStorage.getItem(TIMER_KEY);
-    if (savedStartTime) {
-        const elapsedTime = Date.now() - parseInt(savedStartTime, 10);
-        if (elapsedTime >= OTP_EXPIRATION_TIME) {
-            timerElement.style.display = "none";
-            otpExpiredText.style.display = "inline";
-            resendLink.style.display = "block";
-            localStorage.removeItem(TIMER_KEY); // Clear expired timer
+    function handleTimer(email) {
+        const savedStartTime = localStorage.getItem(getTimerKey(email));
+        if (savedStartTime) {
+            const elapsedTime = Date.now() - parseInt(savedStartTime, 10);
+            if (elapsedTime >= OTP_EXPIRATION_TIME) {
+                timerElement.style.display = "none";
+                otpExpiredText.style.display = "inline";
+                resendLink.style.display = "block";
+                localStorage.removeItem(getTimerKey(email));
+            } else {
+                updateTimer(email, parseInt(savedStartTime, 10));
+            }
         } else {
-            updateTimer(parseInt(savedStartTime, 10)); // Continue timer
+            startTimer(email);
         }
-    } else {
-        startTimer(); // Start a new timer
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email');
+    if (email) {
+        document.getElementById('email').value = email;
+        handleTimer(email);
     }
 });
-
 </script>
 @endpush
