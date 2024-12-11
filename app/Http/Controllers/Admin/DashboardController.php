@@ -10,4 +10,10 @@ class DashboardController extends Controller
     public function index(){
         return view('AdminDashboard.home');
     }
+    public function product(){
+        return view('AdminDashboard.product');
+    }
+    public function createproduct(){
+        return view('AdminDashboard.createproduct');
+    }
 }

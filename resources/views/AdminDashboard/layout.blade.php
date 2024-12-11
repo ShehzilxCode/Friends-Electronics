@@ -10,34 +10,35 @@
     <meta charset="utf-8" />
     <title>Dashboard | Velzon - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="dashboardasset/images/favicon.ico">
+    <link rel="shortcut icon" href="../dashboardasset/images/favicon.ico">
  <!-- Plugins css -->
- <link href="dashboardasset/libs/dropzone/dropzone.css" rel="stylesheet" type="text/css" />
+ <link href="../dashboardasset/libs/dropzone/dropzone.css" rel="stylesheet" type="text/css" />
 
     <!-- nouisliderribute css -->
-    <link rel="stylesheet" href="dashboardasset/libs/nouislider/nouislider.min.css">
+    <link rel="stylesheet" href="../dashboardasset/libs/nouislider/nouislider.min.css">
 
     <!-- gridjs css -->
-    <link rel="stylesheet" href="dashboardasset/libs/gridjs/theme/mermaid.min.css">
+    <link rel="stylesheet" href="../dashboardasset/libs/gridjs/theme/mermaid.min.css">
     <!-- jsvectormap css -->
-    <link href="dashboardasset/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../dashboardasset/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
 
     <!--Swiper slider css-->
-    <link href="dashboardasset/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+    <link href="../dashboardasset/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Layout config Js -->
-    <script src="dashboardasset/js/layout.js"></script>
+    <script src="../dashboardasset/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="dashboardasset/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../dashboardasset/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="dashboardasset/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../dashboardasset/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="dashboardasset/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="../dashboardasset/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="dashboardasset/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="../dashboardasset/css/custom.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -55,19 +56,19 @@
                         <div class="navbar-brand-box horizontal-logo">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="dashboardasset/images/logo-sm.png" alt="" height="22">
+                                    <img src="../dashboardasset/images/logo-sm.png" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="dashboardasset/images/logo-dark.png" alt="" height="17">
+                                    <img src="../dashboardasset/images/logo-dark.png" alt="" height="17">
                                 </span>
                             </a>
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="dashboardasset/images/logo-sm.png" alt="" height="22">
+                                    <img src="../dashboardasset/images/logo-sm.png" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="dashboardasset/images/logo-light.png" alt="" height="17">
+                                    <img src="../dashboardasset/images/logo-light.png" alt="" height="17">
                                 </span>
                             </a>
                         </div>
@@ -136,7 +137,7 @@
                                         <!-- item -->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                             <div class="d-flex">
-                                                <img src="dashboardasset/images/users/avatar-2.jpg"
+                                                <img src="../dashboardasset/images/users/avatar-2.jpg"
                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="m-0">Angela Bernier</h6>
@@ -147,7 +148,7 @@
                                         <!-- item -->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                             <div class="d-flex">
-                                                <img src="dashboardasset/images/users/avatar-3.jpg"
+                                                <img src="../dashboardasset/images/users/avatar-3.jpg"
                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="m-0">David Grasso</h6>
@@ -158,7 +159,7 @@
                                         <!-- item -->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                             <div class="d-flex">
-                                                <img src="dashboardasset/images/users/avatar-5.jpg"
+                                                <img src="../dashboardasset/images/users/avatar-5.jpg"
                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="m-0">Mike Bunch</h6>
@@ -203,7 +204,7 @@
                         <div class="dropdown ms-1 topbar-head-dropdown header-item">
                             <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img id="header-lang-img" src="dashboardasset/images/flags/us.svg"
+                                <img id="header-lang-img" src="../dashboardasset/images/flags/us.svg"
                                     alt="Header Language" height="20" class="rounded">
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -211,7 +212,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language py-2"
                                     data-lang="en" title="English">
-                                    <img src="dashboardasset/images/flags/us.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/us.svg" alt="user-image"
                                         class="me-2 rounded" height="18">
                                     <span class="align-middle">English</span>
                                 </a>
@@ -219,7 +220,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"
                                     data-lang="sp" title="Spanish">
-                                    <img src="dashboardasset/images/flags/spain.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/spain.svg" alt="user-image"
                                         class="me-2 rounded" height="18">
                                     <span class="align-middle">Española</span>
                                 </a>
@@ -227,7 +228,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"
                                     data-lang="gr" title="German">
-                                    <img src="dashboardasset/images/flags/germany.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/germany.svg" alt="user-image"
                                         class="me-2 rounded" height="18"> <span
                                         class="align-middle">Deutsche</span>
                                 </a>
@@ -235,7 +236,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"
                                     data-lang="it" title="Italian">
-                                    <img src="dashboardasset/images/flags/italy.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/italy.svg" alt="user-image"
                                         class="me-2 rounded" height="18">
                                     <span class="align-middle">Italiana</span>
                                 </a>
@@ -243,7 +244,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"
                                     data-lang="ru" title="Russian">
-                                    <img src="dashboardasset/images/flags/russia.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/russia.svg" alt="user-image"
                                         class="me-2 rounded" height="18">
                                     <span class="align-middle">русский</span>
                                 </a>
@@ -251,7 +252,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"
                                     data-lang="ch" title="Chinese">
-                                    <img src="dashboardasset/images/flags/china.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/china.svg" alt="user-image"
                                         class="me-2 rounded" height="18">
                                     <span class="align-middle">中国人</span>
                                 </a>
@@ -259,7 +260,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"
                                     data-lang="fr" title="French">
-                                    <img src="dashboardasset/images/flags/french.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/french.svg" alt="user-image"
                                         class="me-2 rounded" height="18">
                                     <span class="align-middle">français</span>
                                 </a>
@@ -267,7 +268,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item language"
                                     data-lang="ar" title="Arabic">
-                                    <img src="dashboardasset/images/flags/ae.svg" alt="user-image"
+                                    <img src="../dashboardasset/images/flags/ae.svg" alt="user-image"
                                         class="me-2 rounded" height="18">
                                     <span class="align-middle">Arabic</span>
                                 </a>
@@ -296,19 +297,19 @@
                                     <div class="row g-0">
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="dashboardasset/images/brands/github.png" alt="Github">
+                                                <img src="../dashboardasset/images/brands/github.png" alt="Github">
                                                 <span>GitHub</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="dashboardasset/images/brands/bitbucket.png" alt="bitbucket">
+                                                <img src="../dashboardasset/images/brands/bitbucket.png" alt="bitbucket">
                                                 <span>Bitbucket</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="dashboardasset/images/brands/dribbble.png" alt="dribbble">
+                                                <img src="../dashboardasset/images/brands/dribbble.png" alt="dribbble">
                                                 <span>Dribbble</span>
                                             </a>
                                         </div>
@@ -317,20 +318,20 @@
                                     <div class="row g-0">
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="dashboardasset/images/brands/dropbox.png" alt="dropbox">
+                                                <img src="../dashboardasset/images/brands/dropbox.png" alt="dropbox">
                                                 <span>Dropbox</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="dashboardasset/images/brands/mail_chimp.png"
+                                                <img src="../dashboardasset/images/brands/mail_chimp.png"
                                                     alt="mail_chimp">
                                                 <span>Mail Chimp</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="dashboardasset/images/brands/slack.png" alt="slack">
+                                                <img src="../dashboardasset/images/brands/slack.png" alt="slack">
                                                 <span>Slack</span>
                                             </a>
                                         </div>
@@ -376,7 +377,7 @@
                                         </div>
                                         <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                             <div class="d-flex align-items-center">
-                                                <img src="dashboardasset/images/products/img-1.png"
+                                                <img src="../dashboardasset/images/products/img-1.png"
                                                     class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="mt-0 mb-1 fs-14">
@@ -402,7 +403,7 @@
 
                                         <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                             <div class="d-flex align-items-center">
-                                                <img src="dashboardasset/images/products/img-2.png"
+                                                <img src="../dashboardasset/images/products/img-2.png"
                                                     class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="mt-0 mb-1 fs-14">
@@ -427,7 +428,7 @@
 
                                         <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                             <div class="d-flex align-items-center">
-                                                <img src="dashboardasset/images/products/img-3.png"
+                                                <img src="../dashboardasset/images/products/img-3.png"
                                                     class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="mt-0 mb-1 fs-14">
@@ -453,7 +454,7 @@
 
                                         <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                             <div class="d-flex align-items-center">
-                                                <img src="dashboardasset/images/products/img-6.png"
+                                                <img src="../dashboardasset/images/products/img-6.png"
                                                     class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="mt-0 mb-1 fs-14">
@@ -479,7 +480,7 @@
 
                                         <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                             <div class="d-flex align-items-center">
-                                                <img src="dashboardasset/images/products/img-5.png"
+                                                <img src="../dashboardasset/images/products/img-5.png"
                                                     class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="mt-0 mb-1 fs-14">
@@ -624,7 +625,7 @@
                                             <div
                                                 class="text-reset notification-item d-block dropdown-item position-relative">
                                                 <div class="d-flex">
-                                                    <img src="dashboardasset/images/users/avatar-2.jpg"
+                                                    <img src="../dashboardasset/images/users/avatar-2.jpg"
                                                         class="me-3 rounded-circle avatar-xs flex-shrink-0"
                                                         alt="user-pic">
                                                     <div class="flex-grow-1">
@@ -687,7 +688,7 @@
                                             <div
                                                 class="text-reset notification-item d-block dropdown-item position-relative">
                                                 <div class="d-flex">
-                                                    <img src="dashboardasset/images/users/avatar-8.jpg"
+                                                    <img src="../dashboardasset/images/users/avatar-8.jpg"
                                                         class="me-3 rounded-circle avatar-xs flex-shrink-0"
                                                         alt="user-pic">
                                                     <div class="flex-grow-1">
@@ -729,7 +730,7 @@
                                         <div data-simplebar style="max-height: 300px;" class="pe-2">
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="dashboardasset/images/users/avatar-3.jpg"
+                                                    <img src="../dashboardasset/images/users/avatar-3.jpg"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -757,7 +758,7 @@
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="dashboardasset/images/users/avatar-2.jpg"
+                                                    <img src="../dashboardasset/images/users/avatar-2.jpg"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -786,7 +787,7 @@
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="dashboardasset/images/users/avatar-6.jpg"
+                                                    <img src="../dashboardasset/images/users/avatar-6.jpg"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -815,7 +816,7 @@
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="dashboardasset/images/users/avatar-8.jpg"
+                                                    <img src="../dashboardasset/images/users/avatar-8.jpg"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -869,7 +870,7 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                        src="dashboardasset/images/users/avatar-1.jpg" alt="Header Avatar">
+                                        src="../dashboardasset/images/users/avatar-1.jpg" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
                                             Adame</span>
@@ -906,7 +907,7 @@
                                 <button class="dropdown-item" href=""><i
                                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle" data-key="t-logout">Logout</span></button>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -948,19 +949,19 @@
                 <!-- Dark Logo-->
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="dashboardasset/images/logo-sm.png" alt="" height="22">
+                        <img src="../dashboardasset/images/logo-sm.png" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="dashboardasset/images/logo-dark.png" alt="" height="17">
+                        <img src="../dashboardasset/images/logo-dark.png" alt="" height="17">
                     </span>
                 </a>
                 <!-- Light Logo-->
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="dashboardasset/images/logo-sm.png" alt="" height="22">
+                        <img src="../dashboardasset/images/logo-sm.png" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="dashboardasset/images/logo-light.png" alt="" height="17">
+                        <img src="../dashboardasset/images/logo-light.png" alt="" height="17">
                     </span>
                 </a>
                 <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -978,7 +979,7 @@
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="/" class="nav-link" data-key="t-analytics">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-analytics">
                                     Dashboard </a>
                             </li>
                         </ul>
@@ -986,16 +987,16 @@
                         <li class="menu-title"><span data-key="t-menu">Products</span></li>
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="/product" class="nav-link" data-key="t-products">
+                                <a href="{{ route('product.dashboard.page') }}" class="nav-link" data-key="t-products">
                                     Products </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="/createproduct" class="nav-link" data-key="t-create-product"> Create Product
+                                <a href="{{ route('create.product') }}" class="nav-link" data-key="t-create-product"> Create Product
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/category" class="nav-link" data-key="t-customers">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-customers">
                                     Category </a>
                             </li>
                         </ul>
@@ -1003,11 +1004,11 @@
                         <li class="menu-title"><span data-key="t-menu">Orders</span></li>
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="/order" class="nav-link" data-key="t-orders">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-orders">
                                     Orders </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/orderdetail" class="nav-link" data-key="t-order-details"> Order Details
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-order-details"> Order Details
                                 </a>
                             </li>
                         </ul>
@@ -1015,7 +1016,7 @@
                         <ul class="nav nav-sm flex-column">
 
                             <li class="nav-item">
-                                <a href="/customer" class="nav-link" data-key="t-customers">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-customers">
                                     Customers </a>
                             </li>
 
@@ -1769,7 +1770,7 @@
                                 <input class="form-check-input" type="radio" name="data-sidebar-image"
                                     id="sidebarimg-01" value="img-1">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-01">
-                                    <img src="dashboardasset/images/sidebar/img-1.jpg" alt=""
+                                    <img src="../dashboardasset/images/sidebar/img-1.jpg" alt=""
                                         class="avatar-md w-auto object-fit-cover">
                                 </label>
                             </div>
@@ -1778,7 +1779,7 @@
                                 <input class="form-check-input" type="radio" name="data-sidebar-image"
                                     id="sidebarimg-02" value="img-2">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-02">
-                                    <img src="dashboardasset/images/sidebar/img-2.jpg" alt=""
+                                    <img src="../dashboardasset/images/sidebar/img-2.jpg" alt=""
                                         class="avatar-md w-auto object-fit-cover">
                                 </label>
                             </div>
@@ -1786,7 +1787,7 @@
                                 <input class="form-check-input" type="radio" name="data-sidebar-image"
                                     id="sidebarimg-03" value="img-3">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-03">
-                                    <img src="dashboardasset/images/sidebar/img-3.jpg" alt=""
+                                    <img src="../dashboardasset/images/sidebar/img-3.jpg" alt=""
                                         class="avatar-md w-auto object-fit-cover">
                                 </label>
                             </div>
@@ -1794,7 +1795,7 @@
                                 <input class="form-check-input" type="radio" name="data-sidebar-image"
                                     id="sidebarimg-04" value="img-4">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-04">
-                                    <img src="dashboardasset/images/sidebar/img-4.jpg" alt=""
+                                    <img src="../dashboardasset/images/sidebar/img-4.jpg" alt=""
                                         class="avatar-md w-auto object-fit-cover">
                                 </label>
                             </div>
@@ -1890,44 +1891,46 @@
     </div>
 
     <!-- JAVASCRIPT -->
-    <script src="dashboardasset/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="dashboardasset/libs/simplebar/simplebar.min.js"></script>
-    <script src="dashboardasset/libs/node-waves/waves.min.js"></script>
-    <script src="dashboardasset/libs/feather-icons/feather.min.js"></script>
-    <script src="dashboardasset/js/pages/plugins/lord-icon-2.1.0.js"></script>
-    <script src="dashboardasset/js/plugins.js"></script>
+    <script src="../dashboardasset/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../dashboardasset/libs/simplebar/simplebar.min.js"></script>
+    <script src="../dashboardasset/libs/node-waves/waves.min.js"></script>
+    <script src="../dashboardasset/libs/feather-icons/feather.min.js"></script>
+    <script src="../dashboardasset/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="../dashboardasset/js/plugins.js"></script>
 
     <!-- apexcharts -->
-    <script src="dashboardasset/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="../dashboardasset/libs/apexcharts/apexcharts.min.js"></script>
 
     <!-- Vector map-->
-    <script src="dashboardasset/libs/jsvectormap/js/jsvectormap.min.js"></script>
-    <script src="dashboardasset/libs/jsvectormap/maps/world-merc.js"></script>
+    <script src="../dashboardasset/libs/jsvectormap/js/jsvectormap.min.js"></script>
+    <script src="../dashboardasset/libs/jsvectormap/maps/world-merc.js"></script>
 
     <!--Swiper slider js-->
-    <script src="dashboardasset/libs/swiper/swiper-bundle.min.js"></script>
+    <script src="../dashboardasset/libs/swiper/swiper-bundle.min.js"></script>
 
     <!-- Dashboard init -->
-    <script src="dashboardasset/js/pages/dashboard-ecommerce.init.js"></script>
+    <script src="../dashboardasset/js/pages/dashboard-ecommerce.init.js"></script>
     <!-- gridjs js -->
-    <script src="dashboardasset/libs/gridjs/gridjs.umd.js"></script>
-    <script src="../../../../unpkg.com/gridjs%406.1.1/plugins/selection/dist/selection.umd.js"></script>
+    <script src="../dashboardasset/libs/gridjs/gridjs.umd.js"></script>
+    {{-- <script src="../../../../unpkg.com/gridjs%406.1.1/plugins/selection/dist/selection.umd.js"></script> --}}
     <!-- ecommerce product list -->
-    <script src="dashboardasset/js/pages/ecommerce-product-list.init.js"></script>
+    <script src="../dashboardasset/js/pages/ecommerce-product-list.init.js"></script>
     <!-- App js -->
      <!-- ckeditor -->
-     <script src="dashboardasset/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+     <script src="../dashboardasset/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
 
      <!-- dropzone js -->
-     <script src="dashboardasset/libs/dropzone/dropzone-min.js"></script>
- 
-     <script src="dashboardasset/js/pages/ecommerce-product-create.init.js"></script>
- 
-    <script src="dashboardasset/js/app.js"></script>
+     <script src="../dashboardasset/libs/dropzone/dropzone-min.js"></script>
+
+     <script src="../dashboardasset/js/pages/ecommerce-product-create.init.js"></script>
+
+    <script src="../dashboardasset/js/app.js"></script>
 </body>
 
 
 <!-- Mirrored from themesbrand.com/velzon/html/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Feb 2024 08:47:22 GMT -->
+    {{-- JQuery Link --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Custom JS --}}
 

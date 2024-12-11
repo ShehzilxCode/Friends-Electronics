@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 // User Controllers
 use App\Http\Controllers\AuthController;
-
-//Admin Controllers
 use App\Http\Controllers\UserController as FUserController;
 use App\Http\Controllers\User\UserController as UserController;
+
+//Admin Controllers
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('auth.login');
@@ -38,8 +39,19 @@ Route::controller(FUserController::class)->group(function () {
 Route::prefix('admin')->group(function () {
     Route::controller(AdminDashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('admin.dashboard'); // Admin Dashboard Page
+        Route::get('/prouduct', 'product')->name('product.dashboard.page'); // Admin Dashboard Page
+        Route::get('/createproduct', 'createproduct')->name('create.product'); // Admin Dashboard Page
     });
+    Route::controller(AdminCategoryController::class)->group(function () {
+        Route::prefix('category')->group(function () {
+            Route::post('/addcategory', 'create')->name('categroy.insert'); //add category
+            Route::get('/fetchcategory', 'fetch')->name('categroy.fetch'); //add category
+        });
+    });
+
 });
+
+
 
 //User Auth routes
 

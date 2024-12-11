@@ -67,7 +67,7 @@
                 <input type="hidden" name="email" id="email" value="{{ request('email') }}">
                 <button type="submit" id="resend-link" class="fw-semibold text-primary text-decoration-underline">Resend</button>
             </form>
-            
+
         </div>
     </div>
 </div>
