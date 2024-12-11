@@ -996,7 +996,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-customers">
+                                <a href="{{ route('product.category') }}" class="nav-link" data-key="t-customers">
                                     Category </a>
                             </li>
                         </ul>

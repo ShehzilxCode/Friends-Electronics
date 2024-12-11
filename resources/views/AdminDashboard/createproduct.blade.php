@@ -287,6 +287,15 @@
                             <input type="text" name="categoryinput" class="form-control" id="category-name"
                                 placeholder="Add Category">
                         </div>
+                        <div>
+                            <label for="status-field" class="form-label">Status</label>
+                            <select class="form-control" name="status" data-choices data-choices-search-false
+                                name="status-field" id="status-field">
+                                <option value="" selected disabled>Status</option>
+                                <option value="0">Active</option>
+                                <option value="1">Block</option>
+                            </select>
+                        </div>
                         <div class="text-end">
                             <button type="submit" id="btn" class="btn btn-primary">Add Category</button>
                         </div>
@@ -302,6 +311,8 @@
             $('#category-form').submit(function(e) {
                 e.preventDefault(); // This prevents the default form submission
                 var categoryname = $('#category-name').val();
+                var status = $('#status-field').val();
+                // console.log(status);
 
                 if (categoryname == null || categoryname == "") {
                     Toastify({
@@ -314,12 +325,24 @@
                         },
 
                     }).showToast();
+                } else if (status == null || status == "") {
+                    Toastify({
+
+                        text: "Status is Required",
+
+                        duration: 3000,
+                        style: {
+                            background: "linear-gradient(to right, #713107, #ff0000)",
+                        },
+
+                    }).showToast();
                 } else {
                     $.ajax({
                         url: '{{ route('categroy.insert') }}',
                         type: 'POST',
                         data: {
-                            categoryname: categoryname
+                            categoryname: categoryname,
+                            status: status
                         },
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -380,11 +403,11 @@
                             `)
                         for (let i = 0; i < response.data.length; i++) {
                             $('#categorydropdown').append(`
-                                <option >` + response.data[i]['Category'] + `</option>
+                                <option value="`+ response.data[i]['id'] +`">` + response.data[i]['Category'] + `</option>
                             `)
                         }
                     } else {
-                        $('#categorydropdown').append('<option> selected disabled>Data Not Found</option>')
+                        $('#categorydropdown').append('<option selected disabled >No Data</option>')
                     }
                 },
                 error: function(e) {

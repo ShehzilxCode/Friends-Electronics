@@ -16,4 +16,7 @@ class DashboardController extends Controller
     public function createproduct(){
         return view('AdminDashboard.createproduct');
     }
+    public function category(Request $request){
+        return view('AdminDashboard.category');
+    }
 }

@@ -14,17 +14,18 @@ class CategoryController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'categoryname' => 'required|string|max:255',
+            'status' => 'required',
         ]);
 
         if($validate->fails())  {
             return response()->json([
                 "status" => "error",
-                "message"=> "Category is required"
+                "message"=> " Category & Status  is required"
             ]);
         }else{
         $category = new category();
         $category->Category = $request->categoryname;
-        $category->status = 0;
+        $category->status = $request->status;
         $category->save();
         return response()->json([
             'status' => 'success',

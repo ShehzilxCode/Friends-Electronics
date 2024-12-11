@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard', 'index')->name('admin.dashboard'); // Admin Dashboard Page
         Route::get('/prouduct', 'product')->name('product.dashboard.page'); // Admin Dashboard Page
         Route::get('/createproduct', 'createproduct')->name('create.product'); // Admin Dashboard Page
+        Route::get('/category', 'category')->name('product.category'); // Admin Dashboard Page
     });
     Route::controller(AdminCategoryController::class)->group(function () {
         Route::prefix('category')->group(function () {
