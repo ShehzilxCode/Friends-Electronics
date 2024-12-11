@@ -169,9 +169,15 @@ class AuthController extends Controller
          if(Auth::attempt(['email' => $req->email, 'password' => $req->password ])){
 
             $user = Auth::user();
-            $redirect_url = $user->role == 2 
-            ? route('admin.dashboard') 
-            : route('user.home');
+            if($user->role == "admin")
+            {
+                $redirect_url = route('admin.dashboard');
+            }
+            else{
+                $redirect_url = route('user.home');
+            }
+
+            Log::info("redirect Route: $redirect_url");
 
             if($user->role == 1 && $user->email_verified_at != null){
                 return response()->json([

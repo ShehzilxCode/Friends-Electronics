@@ -23,6 +23,7 @@
     <!-- Vendor CSS (Bootstrap & Icon Font) -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/lastudioicon.css" />
+    <link href="DashboardAsset/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Plugins CSS (All Plugins Files) -->
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
@@ -121,12 +122,31 @@
                                             <i class="lastudioicon-zoom-1"></i>
                                         </button>
                                     </li>
+                                    @php
+                                    $user = Auth::user();
+                                    @endphp
+                                
+                                @if($user && $user->role === "user")
                                     <li>
-                                        <a href="{{route('users.register')}}" aria-label="My Account">
+                                        <a href="{{ route('user.myaccount') }}" aria-label="My Account">
                                             <i class="lastudioicon-single-01-2"></i>
                                         </a>
                                     </li>
+                                @elseif($user && $user->role === "admin")
                                     <li>
+                                        <a href="{{ route('admin.dashboard') }}" aria-label="Dashboard">
+                                            <i class="ri-dashboard-line"></i>
+                                        </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{ route('users.login') }}" aria-label="Log In">
+                                            <i class="lastudioicon-single-01-2"></i>
+                                        </a>
+                                    </li>
+                                @endif
+                                
+                                     <li>
                                         <a href="{{ route('user.wishlist') }}" aria-label="Wishlist">
                                             <i class="lastudioicon-heart-2"></i>
                                             <span class="badge">03</span>

@@ -75,17 +75,58 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    // Handle form submission
     $('#loginForm').on('submit', function(e) {
         e.preventDefault();
-        // Set the value of the hidden textarea to the Quill editor content
-        handleFormUploadForm(
-            'POST',
-            '#loginForm',
-            '#loginbtn',
-            '{{ route('auth.login') }}',
-            ''
-        );
+
+        let formData = $(this).serialize();
+        let submitButton = $('#loginbtn');
+
+        // Disable button to prevent multiple submissions
+        submitButton.attr('disabled', true).text('Logging in...');
+
+        $.ajax({
+            url: '{{ route('auth.login') }}',
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Show Toastify notification
+                    Toastify({
+                        text: response.message || "Login successful. Redirecting...",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }).showToast();
+
+                    setTimeout(() => {
+                        window.location.href = response.redirect_url;
+                    }, 3000);
+                } else {
+                    Toastify({
+                        text: response.message || "Something went wrong.",
+                        duration: 3000,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "linear-gradient(to right, #FF0000, #FF6347)",
+                    }).showToast();
+                }
+            },
+            error: function(xhr) {
+                let errorResponse = xhr.responseJSON;
+                Toastify({
+                    text: errorResponse?.message || 'An error occurred during login.',
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #FF0000, #FF6347)",
+                }).showToast();
+            },
+            complete: function() {
+                // Re-enable button
+                submitButton.attr('disabled', false).text('Sign In');
+            }
+        });
     });
 });
 </script>
