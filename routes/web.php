@@ -10,6 +10,7 @@ use App\Http\Controllers\User\UserController as UserController;
 //Admin Controllers
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('auth.login');
@@ -43,13 +44,21 @@ Route::prefix('admin')->group(function () {
         Route::get('/createproduct', 'createproduct')->name('create.product'); // Admin Dashboard Page
         Route::get('/category', 'category')->name('product.category'); // Admin Dashboard Page
     });
+
     Route::controller(AdminCategoryController::class)->group(function () {
         Route::prefix('category')->group(function () {
-            Route::post('/addcategory', 'create')->name('categroy.insert'); //add category
-            Route::get('/fetchcategory', 'fetch')->name('categroy.fetch'); //add category
-            Route::get('/getrecord', 'getrecord')->name('get.record'); //update category
-            Route::post('/update', 'updaterecord')->name('update.record'); //add category
+            Route::post('/addcategory', 'create')->name('categroy.insert'); //Add category
+            Route::get('/fetchcategory', 'fetch')->name('categroy.fetch'); //Fetch category
+            Route::get('/getrecord', 'getrecord')->name('get.record'); //get Update category
+            Route::post('/update', 'updaterecord')->name('update.record'); //Update category
 
+        });
+    });
+    
+    Route::controller(AdminProductController::class)->group(function () {
+        Route::prefix('product')->group(function () {
+            Route::post('/addproduct', 'create')->name('product.create'); //Admin Product Create
+            // Route::get('/fetchcategory', 'fetch')->name('product.fetch');
         });
     });
 

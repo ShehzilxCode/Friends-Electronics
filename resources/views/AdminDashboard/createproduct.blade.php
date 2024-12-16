@@ -24,7 +24,8 @@
                 </div>
                 <!-- end page title -->
 
-                <form id="insert-product" enctype="multipart/form-data">
+                <form id="insert-product" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="card">
@@ -33,7 +34,7 @@
                                         <label class="form-label" for="product-title-input">Product Title</label>
                                         <input type="hidden" class="form-control" id="formAction" name="formAction"
                                             value="add">
-                                        <input type="text" class="form-control" id="product-title-input" value=""
+                                        <input type="text" name="producttitle" class="form-control" id="product-title-input" value=""
                                             placeholder="Enter product title">
                                         <div class="invalid-feedback">Please Enter a product title.</div>
                                     </div>
@@ -62,9 +63,9 @@
                                                             </div>
                                                         </div>
                                                     </label>
-                                                    <input class="form-control d-none" value=""
+                                                    <input name="productmainimage" class="form-control d-none" value=""
                                                         id="product-image-input" type="file"
-                                                        accept="image/png, image/gif, image/jpeg">
+                                                        accept="image/*">
                                                 </div>
                                                 <div class="avatar-lg">
                                                     <div class="avatar-title bg-light rounded">
@@ -74,13 +75,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div>
+                                    <div>
                                                 <h5 class="fs-14 mb-1">Product Gallery</h5>
                                                 <p class="text-muted">Add Product Gallery Images.</p>
 
                                                 <div class="dropzone">
                                                     <div class="fallback">
-                                                        <input name="file" type="file" multiple="multiple">
+                                                        <input type="file" id="product-images" name="file[]" multiple accept="image/*" required>
                                                     </div>
                                                     <div class="dz-message needsclick">
                                                         <div class="mb-3">
@@ -116,7 +117,7 @@
                                                     </li>
                                                 </ul>
                                                 <!-- end dropzon-preview -->
-                                            </div> --}}
+                                            </div>
                                 </div>
                             </div>
                             <!-- end card -->
@@ -141,7 +142,7 @@
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="stocks-input">SKU</label>
-                                                        <input type="text" class="form-control" id="stocks-input"
+                                                        <input type="text" name="productsku" class="form-control" id="stocks-input"
                                                             placeholder="SKU">
                                                         <div class="invalid-feedback">Please Enter a product stocks.</div>
                                                     </div>
@@ -151,7 +152,7 @@
                                                         <label class="form-label" for="product-price-input">Price</label>
                                                         <div class="input-group has-validation mb-3">
                                                             <span class="input-group-text" id="product-price-addon">$</span>
-                                                            <input type="text" class="form-control"
+                                                            <input name="productprice" type="text" class="form-control"
                                                                 id="product-price-input" placeholder="Enter price"
                                                                 aria-label="Price" aria-describedby="product-price-addon">
                                                             <div class="invalid-feedback">Please Enter a product price.
@@ -167,7 +168,7 @@
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text"
                                                                 id="product-discount-addon">%</span>
-                                                            <input type="text" class="form-control"
+                                                            <input type="text" name="productdiscount" class="form-control"
                                                                 id="product-discount-input" placeholder="Enter discount"
                                                                 aria-label="discount"
                                                                 aria-describedby="product-discount-addon">
@@ -177,7 +178,7 @@
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="orders-input">Total</label>
-                                                        <input readonly class="form-control" id="orders-input"
+                                                        <input name="productTotal" class="form-control" id="orders-input"
                                                             placeholder="Orders">
                                                         <div class="invalid-feedback">Please Enter a product orders.</div>
                                                     </div>
@@ -196,7 +197,7 @@
                             </div>
                             <!-- end card -->
                             <div class="text-end mb-3">
-                                <button type="submit" class="btn btn-success w-sm">Submit</button>
+                                <button type="submit" id="addproductbtn" class="btn btn-success w-sm">Submit</button>
                             </div>
                         </div>
                         <!-- end col -->
@@ -210,7 +211,7 @@
                                     <div>
                                         <label for="choices-publish-visibility-input"
                                             class="form-label">Visibility</label>
-                                        <select class="form-select" id="choices-publish-visibility-input" data-choices
+                                        <select name="productstatus" class="form-select" id="choices-publish-visibility-input" data-choices
                                             data-choices-search-false>
                                             <option value="Public" selected>Public</option>
                                             <option value="Hidden">Hidden</option>
@@ -228,7 +229,7 @@
                                     <p class="text-muted mb-2"> <a href="#" data-bs-toggle="modal"
                                             data-bs-target="#signupModals" class="float-end text-decoration-underline">Add
                                             New</a>Select product category</p>
-                                    <select class="form-select" id="categorydropdown" name="choices-category-input"
+                                    <select class="form-select" id="categorydropdown" name="productcategory"
                                         data-choices data-choices-search-false>
                                         {{-- <option selected disabled>Choose Category...</option> --}}
 
@@ -249,7 +250,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="text-muted mb-2">Add short description for product</p>
-                                    <textarea class="form-control" id="textarea" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
+                                    <textarea name="productdesc" class="form-control" id="textarea" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
                                 </div>
                                 <!-- end card body -->
                             </div>
@@ -416,5 +417,19 @@
             })
         };
         fetchdata();
+
+$(document).ready(function () {
+    $('#insert-product').on('submit', function (e) {
+        e.preventDefault();
+        handleFormUploadForm(
+            'POST',
+            '#insert-product',
+            '#addproductbtn',
+            "{{ route('product.create') }}",
+            "{{ route('product.dashboard.page') }}"
+        );
+    });
+});
+
     </script>
 @endpush
