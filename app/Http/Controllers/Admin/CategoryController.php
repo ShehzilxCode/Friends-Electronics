@@ -33,6 +33,7 @@ class CategoryController extends Controller
         ]);
     }
 
+
 }
 public function fetch(){
     $fetchcategory = Category::all();
@@ -40,5 +41,50 @@ public function fetch(){
         'data' => $fetchcategory
     ]);
 }
+
+public function getrecord(Request $request)
+{
+    $category = Category::find($request->id);
+    if ($category) {
+        return response()->json([
+            'status' => 'success',
+            'data' => $category
+        ]);
+    } else {
+        return response()->json([
+            'success' => false,
+            'error' => 'Category not found'
+        ]);
+    }
+}
+
+// update record
+public function updaterecord(Request $request)
+{
+    // Validate the incoming request data
+    $category = Category::find($request->id);
+
+    if (!$category) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Category not found'
+        ], 404);
+    }
+
+    // Update the category record
+    $category->Category = $request->categoryinput;
+    $category->Status = $request->upstatus;
+
+    $category->save();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Record Updated'
+    ]);
+}
+
+
+
+
 
 }

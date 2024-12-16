@@ -71,7 +71,7 @@
                                                     <div>
                                                         <select class="form-control" data-plugin="choices" data-choices
                                                             data-choices-search-false name="choices-single-default"
-                                                            id="idStatus">
+                                                            name="status" id="idStatus">
                                                             <option value="">Status</option>
                                                             <option value="all" selected>All</option>
                                                             <option value="Active">Active</option>
@@ -135,6 +135,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- insert model  --}}
                                 <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
@@ -149,12 +150,12 @@
                                                     <div class="mb-3">
                                                         <label for="customername-field" class="form-label">Category
                                                         </label>
-                                                        <input type="text" name="categoryinput" class="form-control"
+                                                        <input type="text" name="upcategoryinput" class="form-control"
                                                             id="category-name" placeholder="Add Category">
                                                     </div>
                                                     <div>
                                                         <label for="status-field" class="form-label">Status</label>
-                                                        <select class="form-control" name="status" data-choices
+                                                        <select class="form-control" name="upstatus" data-choices
                                                             data-choices-search-false name="status-field"
                                                             id="status-field">
                                                             <option value="" selected disabled>Status</option>
@@ -176,7 +177,49 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- update model  --}}
 
+                                <div class="modal fade" id="updatemodal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-light p-3">
+                                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close" id="close-modal"></button>
+                                            </div>
+                                            <form id="update-form">
+                                                <div class="modal-body">
+                                                    <input type="hidden" id="id" name="categoryid" />
+                                                    <div class="mb-3">
+                                                        <label for="customername-field" class="form-label">Category
+                                                        </label>
+                                                        <input type="text" name="categoryinput" class="form-control"
+                                                            id="upcategory-name" placeholder="Add Category">
+                                                    </div>
+                                                    <div>
+                                                        <label for="status-field" class="form-label">Status</label>
+                                                        <select class="form-control" name="upstatus" data-choices
+                                                            data-choices-search-false id="status-field">
+                                                            <option value="" selected disabled>Status</option>
+                                                            <option value="0">Active</option>
+                                                            <option value="1">Block</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="hstack gap-2 justify-content-end">
+                                                        <button type="button" class="btn btn-light"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success"
+                                                            id="update-btn">Update Category</button>
+
+                                                        <!-- <button type="button" class="btn btn-success" id="edit-btn">Update</button> -->
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Modal -->
                                 <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -322,27 +365,30 @@
                             `)
                         for (let i = 0; i < response.data.length; i++) {
                             let statusText = response.data[i]['Status'] === 0 ? 'Active' : 'Inactive';
-                            let badgeClass = response.data[i]['Status'] === 0 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger';
+                            let badgeClass = response.data[i]['Status'] === 0 ?
+                                'bg-success-subtle text-success' : 'bg-danger-subtle text-danger';
                             let createdAt = new Date(response.data[i]['created_at']);
-                    let formattedDate = createdAt.toLocaleString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true
-                    });
+                            let formattedDate = createdAt.toLocaleString('en-US', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: true
+                            });
 
                             $('#tbody').append(`
                                 <tr>
                                      <td>` + (i + 1) + `</td>
                                     <td>` + response.data[i]['Category'] + `</td>
                                     <td>` + formattedDate + `</td>
-                                    <td>  <span class="badge ` + badgeClass + ` text-uppercase">` + statusText + `</td>
+                                    <td>  <span class="badge ` + badgeClass + ` text-uppercase">` + statusText +
+                                `</td>
                                     <td>
                                <ul class="list-inline hstack gap-2 mb-0">
-                                   <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                       <a href="#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
+                                   <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"  title="Edit">
+                                       <a href="#updatemodal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn" onclick="fetchCategoryDetails(` +
+                                response.data[i]['id'] + `)">
                                         <i class="ri-pencil-fill fs-16"></i>
                                       </a>
                                    </li>
@@ -365,6 +411,93 @@
                 }
             })
         };
+
+        function fetchCategoryDetails(categoryId) {
+            $.ajax({
+                url: '{{ route('get.record') }}', // Replace with the actual route to get category details
+                type: 'get',
+                data: {
+                    id: categoryId
+                },
+                success: function(response) {
+                    console.log(response); // Log the response for debugging
+                    if (response.status == "success") {
+                        // Populate the modal form fields with the category data
+                        $('#id').val(response.data.id);
+                        $('#upcategory-name').val(response.data.Category);
+                        $('#status-field').val(response.data.Status);
+
+
+                        $('#updatemodal').modal('show');
+                    } else {
+                        Toastify({
+                            text: response.error || "Failed to fetch category details",
+                            duration: 3000,
+                            style: {
+                                background: "linear-gradient(to right, #713107, #ff0000)"
+                            }
+                        }).showToast();
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText);
+                    Toastify({
+                        text: "An error occurred while fetching the category details",
+                        duration: 3000,
+                        style: {
+                            background: "linear-gradient(to right, #713107, #ff0000)"
+                        }
+                    }).showToast();
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('#update-form').submit(function(e) {
+                e.preventDefault()
+
+                var id = $('#id').val(); // Use the correct field to get the ID
+                var category = $('#upcategory-name').val();
+                var check = $('#status-field').val();
+
+                // Check if id, category, and status are being passed correctly
+                console.log(id, category, check)
+
+                $.ajax({
+                    url: '{{ route('update.record') }}',
+                    type: 'post',
+                    data: {
+                        id: id,
+                        categoryinput: category, // Match the parameter name in the backend
+                        upstatus: check // Match the parameter name in the backend
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.status == "success") {
+                            Toastify({
+                                text: response.message,
+                                duration: 3000,
+                                style: {
+                                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                                },
+                            }).showToast();
+
+                        // console.log(check)
+                        }
+                    },
+                    error: function(e) {
+                        console.log(e.responseText)
+                    }
+                })
+
+            })
+        })
+
+
+
+
         fetchdata();
     </script>
 @endpush

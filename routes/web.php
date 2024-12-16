@@ -47,6 +47,9 @@ Route::prefix('admin')->group(function () {
         Route::prefix('category')->group(function () {
             Route::post('/addcategory', 'create')->name('categroy.insert'); //add category
             Route::get('/fetchcategory', 'fetch')->name('categroy.fetch'); //add category
+            Route::get('/getrecord', 'getrecord')->name('get.record'); //update category
+            Route::post('/update', 'updaterecord')->name('update.record'); //add category
+
         });
     });
 
