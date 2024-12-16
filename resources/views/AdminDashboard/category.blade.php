@@ -155,9 +155,8 @@
                                                     </div>
                                                     <div>
                                                         <label for="status-field" class="form-label">Status</label>
-                                                        <select class="form-control" name="upstatus" data-choices
-                                                            data-choices-search-false name="status-field"
-                                                            id="status-field">
+                                                        <select id="status-field" class="form-control" name="upstatus"
+                                                            data-choices data-choices-search-false name="status-field">
                                                             <option value="" selected disabled>Status</option>
                                                             <option value="0">Active</option>
                                                             <option value="1">Block</option>
@@ -199,7 +198,7 @@
                                                     <div>
                                                         <label for="status-field" class="form-label">Status</label>
                                                         <select class="form-control" name="upstatus" data-choices
-                                                            data-choices-search-false id="status-field">
+                                                            data-choices-search-false id="up-status-field">
                                                             <option value="" selected disabled>Status</option>
                                                             <option value="0">Active</option>
                                                             <option value="1">Block</option>
@@ -358,7 +357,7 @@
                 url: '{{ route('categroy.fetch') }}',
                 type: 'get',
                 success: function(response) {
-                    console.log(response)
+                    // console.log(response)
                     if (response.data.length > 0) {
                         $('#categorydropdown').append(`
                                 <option selected disabled>Choose Category</option>
@@ -420,12 +419,12 @@
                     id: categoryId
                 },
                 success: function(response) {
-                    console.log(response); // Log the response for debugging
+                    // console.log(response); // Log the response for debugging
                     if (response.status == "success") {
                         // Populate the modal form fields with the category data
                         $('#id').val(response.data.id);
                         $('#upcategory-name').val(response.data.Category);
-                        $('#status-field').val(response.data.Status);
+                        $('#up-status-field').val(response.data.Status);
 
 
                         $('#updatemodal').modal('show');
@@ -440,7 +439,7 @@
                     }
                 },
                 error: function(e) {
-                    console.log(e.responseText);
+                    // console.log(e.responseText);
                     Toastify({
                         text: "An error occurred while fetching the category details",
                         duration: 3000,
@@ -458,10 +457,10 @@
 
                 var id = $('#id').val(); // Use the correct field to get the ID
                 var category = $('#upcategory-name').val();
-                var check = $('#status-field').val();
+                var check = $('#up-status-field').val();
 
                 // Check if id, category, and status are being passed correctly
-                console.log(id, category, check)
+                // console.log(id, category, check)
 
                 $.ajax({
                     url: '{{ route('update.record') }}',
@@ -483,12 +482,22 @@
                                     background: "linear-gradient(to right, #00b09b, #96c93d)",
                                 },
                             }).showToast();
+                            $('#updatemodal').modal('hide');
+                            $('#tbody').empty();
 
-                        // console.log(check)
+                            fetchdata();
+                            // console.log(check)
                         }
                     },
                     error: function(e) {
-                        console.log(e.responseText)
+                        // console.log(e.responseText)
+                        Toastify({
+                                text: "Error",
+                                duration: 3000,
+                                style: {
+                                    background: "linear-gradient(to right, #ff4800, #ff1d00)",
+                                },
+                            }).showToast();
                     }
                 })
 
