@@ -219,7 +219,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Modal -->
+                                <!--Delete Modal -->
                                 <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
@@ -241,8 +241,8 @@
                                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                                     <button type="button" class="btn w-sm btn-light"
                                                         data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn w-sm btn-danger"
-                                                        id="delete-record">Yes, Delete It!</button>
+                                                    <a href="" type="button" class="btn w-sm btn-danger"
+                                                        id="delete-record">Yes, Delete It!</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -378,7 +378,7 @@
 
                             $('#tbody').append(`
                                 <tr>
-                                     <td>` + (i + 1) + `</td>
+                                     <td>` +response.data[i]['id'] + `</td>
                                     <td>` + response.data[i]['Category'] + `</td>
                                     <td>` + formattedDate + `</td>
                                     <td>  <span class="badge ` + badgeClass + ` text-uppercase">` + statusText +
@@ -392,7 +392,8 @@
                                       </a>
                                    </li>
                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                      <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">
+                                      <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal" onclick="deletedata(` +
+                                response.data[i]['id'] + `)">
                                            <i class="ri-delete-bin-5-fill fs-16"></i>
                                       </a>
                                  </li>
@@ -504,9 +505,9 @@
             })
         })
 
+        // delete work
 
-
-
+        
         fetchdata();
     </script>
 @endpush

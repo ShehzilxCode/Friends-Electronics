@@ -36,11 +36,12 @@ class CategoryController extends Controller
 
 }
 public function fetch(){
-    $fetchcategory = Category::all();
+    $fetchcategory = Category::orderBy('id', 'desc')->get(); //desc is not description its descending order
     return response()->json([
         'data' => $fetchcategory
     ]);
 }
+
 
 public function getrecord(Request $request)
 {
@@ -82,6 +83,7 @@ public function updaterecord(Request $request)
         'message' => 'Record Updated'
     ]);
 }
+
 
 
 
