@@ -84,7 +84,26 @@ public function updaterecord(Request $request)
     ]);
 }
 
+// delete record
 
+public function deleterecord($id){
+    $category = Category::find($id);
+
+    if($category){
+        $category->delete();
+        return response()->json([
+            'status'=> 'success',
+            'message'=> 'Record Deleted'
+        ]);
+    }
+    else{
+        return response()->json([
+            'status'=> 'error',
+            'message'=> 'Record not found'
+        ]);
+    }
+
+}
 
 
 

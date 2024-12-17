@@ -220,7 +220,7 @@
                                     </div>
                                 </div>
                                 <!--Delete Modal -->
-                                <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal fade zoomIn" id="delete-modal" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -239,10 +239,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                                    <button type="button" class="btn w-sm btn-light"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <a href="" type="button" class="btn w-sm btn-danger"
-                                                        id="delete-record">Yes, Delete It!</a>
+                                                    <form id="delete-form">
+                                                        <input type="text" readonly id="delete-id">
+                                                        <button type="button" class="btn w-sm btn-light"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button href="" type="submit" class="btn w-sm btn-danger"
+                                                            id="delete-record">Yes, Delete It!</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -268,6 +271,7 @@
 @endsection
 @push('scripts')
     <script>
+        // insert work
         $(document).ready(function() {
             $('#category-form').submit(function(e) {
                 e.preventDefault(); // This prevents the default form submission
@@ -351,7 +355,7 @@
                 }
             });
         });
-
+        // fetch work 
         function fetchdata() {
             $.ajax({
                 url: '{{ route('categroy.fetch') }}',
@@ -378,7 +382,7 @@
 
                             $('#tbody').append(`
                                 <tr>
-                                     <td>` +response.data[i]['id'] + `</td>
+                                     <td>` + response.data[i]['id'] + `</td>
                                     <td>` + response.data[i]['Category'] + `</td>
                                     <td>` + formattedDate + `</td>
                                     <td>  <span class="badge ` + badgeClass + ` text-uppercase">` + statusText +
@@ -387,12 +391,13 @@
                                <ul class="list-inline hstack gap-2 mb-0">
                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"  title="Edit">
                                        <a href="#updatemodal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn" onclick="fetchCategoryDetails(` +
-                                response.data[i]['id'] + `)">
+                                response.data[i]['id'] +
+                                `)">
                                         <i class="ri-pencil-fill fs-16"></i>
                                       </a>
                                    </li>
                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                      <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal" onclick="deletedata(` +
+                                      <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#delete-modal" onclick="getrecord(` +
                                 response.data[i]['id'] + `)">
                                            <i class="ri-delete-bin-5-fill fs-16"></i>
                                       </a>
@@ -411,7 +416,7 @@
                 }
             })
         };
-
+        // update work
         function fetchCategoryDetails(categoryId) {
             $.ajax({
                 url: '{{ route('get.record') }}', // Replace with the actual route to get category details
@@ -493,21 +498,78 @@
                     error: function(e) {
                         // console.log(e.responseText)
                         Toastify({
-                                text: "Error",
-                                duration: 3000,
-                                style: {
-                                    background: "linear-gradient(to right, #ff4800, #ff1d00)",
-                                },
-                            }).showToast();
+                            text: "Error",
+                            duration: 3000,
+                            style: {
+                                background: "linear-gradient(to right, #ff4800, #ff1d00)",
+                            },
+                        }).showToast();
                     }
                 })
 
             })
         })
-
+        // update work end
         // delete work
+        function getrecord(id) {
+            var id = id
+            console.log(id);
+            $('#delete-id').val(id);
+        }
 
-        
+        $(document).ready(function() {
+            $('#delete-modal').submit(function(e) {
+                e.preventDefault();
+                var inputid = $('#delete-id').val();
+                console.log(inputid)
+
+                $.ajax({
+                    url: '{{ route('delete.record', ':id') }}'.replace(':id',
+                        inputid), // Pass ID dynamically
+                    type: 'Post',
+                    data: inputid,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.status == "success") {
+                            Toastify({
+
+                                text: "Category Deleted",
+
+                                duration: 3000,
+                                style: {
+                                    background: "linear-gradient(to right, #02bdc6, #07ab17)",
+                                },
+
+                            }).showToast();
+
+                            $('#delete-modal').modal('hide');
+                            $('#tbody').empty();
+                            fetchdata();
+
+                        } else {
+                            Toastify({
+
+                                text: "Record not found",
+
+                                duration: 3000,
+                                style: {
+                                    background: "linear-gradient(to right, #713107, #ff0000)",
+                                },
+
+                            }).showToast();
+                        }
+                    },
+                    error: function(e) {
+                        console.log(e.responseText);
+                    }
+
+                })
+            });
+        })
+
+
         fetchdata();
     </script>
 @endpush

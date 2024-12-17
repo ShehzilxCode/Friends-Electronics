@@ -51,10 +51,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/fetchcategory', 'fetch')->name('categroy.fetch'); //Fetch category
             Route::get('/getrecord', 'getrecord')->name('get.record'); //get Update category
             Route::post('/update', 'updaterecord')->name('update.record'); //Update category
+            Route::post('/destroy/{id}', 'deleterecord')->name('delete.record');
 
         });
     });
-    
+
     Route::controller(AdminProductController::class)->group(function () {
         Route::prefix('product')->group(function () {
             Route::post('/addproduct', 'create')->name('product.create'); //Admin Product Create
