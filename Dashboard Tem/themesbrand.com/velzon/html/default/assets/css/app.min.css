@@ -9118,14 +9118,14 @@ div.code-toolbar>.toolbar button:hover {
     background-color: transparent
 }
 
-.dropzone {
+.dropzone-container {
     min-height: 230px;
     border: 2px dashed var(--vz-border-color);
     background: var(--vz-secondary-bg);
     border-radius: 6px
 }
 
-.dropzone .dz-message {
+.dropzone-container .dz-message {
     font-size: 24px;
     width: 100%;
     margin: 1em 0

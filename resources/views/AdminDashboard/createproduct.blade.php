@@ -81,7 +81,7 @@
 
                                                 <div class="dropzone">
                                                     <div class="fallback">
-                                                        <input type="file" id="product-images" name="file[]" multiple accept="image/*" required>
+                                                        <input type="file" name="file[]" multiple accept="image/*" required>
                                                     </div>
                                                     <div class="dz-message needsclick">
                                                         <div class="mb-3">
