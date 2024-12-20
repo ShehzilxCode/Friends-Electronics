@@ -382,7 +382,7 @@
 
                             $('#tbody').append(`
                                 <tr>
-                                     <td>` + response.data[i]['id'] + `</td>
+                                     <td>` + (i+1) + `</td>
                                     <td>` + response.data[i]['Category'] + `</td>
                                     <td>` + formattedDate + `</td>
                                     <td>  <span class="badge ` + badgeClass + ` text-uppercase">` + statusText +

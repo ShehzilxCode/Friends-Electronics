@@ -858,156 +858,9 @@
                                     Category
                                 </h4>
                                 <div class="sidebar-widget-item__filter category-filter">
-                                    <ul class="sidebar-widget-item__list category">
-                                        <li>
-                                            <input type="checkbox" id="category-1" />
-                                            <label for="category-1">
-                                                <span></span>Accessories</label>
-                                        </li>
-                                        <li class="">
-                                            <input type="checkbox" id="category-2" />
-                                            <label for="category-2">
-                                                <span></span>Baby</label>
+                                    <ul class="sidebar-widget-item__list category" id="category-section">
+                                    
 
-                                            <button class="narrow collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Baby" aria-label="down-arrow">
-                                                <i
-                                                        class="lastudioicon-down-arrow"
-                                                    ></i>
-                                            </button>
-
-                                            <div id="Baby" class="collapse" data-bs-parent="#accordionCategory">
-                                                <ul class="children">
-                                                    <li>
-                                                        <input type="checkbox" id="category-2-1" />
-                                                        <label for="category-2-1">
-                                                            <span></span>Accessories</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" id="category-2-2" />
-                                                        <label for="category-2-2">
-                                                            <span></span>Clothing</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" id="category-2-3" />
-                                                        <label for="category-2-3">
-                                                            <span></span>Learning</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" id="category-2-4" />
-                                                        <label for="category-2-4">
-                                                            <span></span>New-born</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" id="category-2-5" />
-                                                        <label for="category-2-5">
-                                                            <span></span>Toys</label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-3" />
-                                            <label for="category-3">
-                                                <span></span>Bag</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-4" />
-                                            <label for="category-4">
-                                                <span></span>Big
-                                                Size</label>
-
-                                            <button class="narrow collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#BigSize" aria-label="down-arrow">
-                                                <i
-                                                        class="lastudioicon-down-arrow"
-                                                    ></i>
-                                            </button>
-
-                                            <div id="BigSize" class="collapse" data-bs-parent="#accordionCategory">
-                                                <ul class="children">
-                                                    <li>
-                                                        <input type="checkbox" id="category-4-1" />
-                                                        <label for="category-4-1">
-                                                            <span></span>Man</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" id="category-4-2" />
-                                                        <label for="category-4-2">
-                                                            <span></span>On
-                                                            Sale</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="checkbox" id="category-4-3" />
-                                                        <label for="category-4-3">
-                                                            <span></span>Women</label>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-5" />
-                                            <label for="category-5">
-                                                <span></span>Burger</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-6" />
-                                            <label for="category-6">
-                                                <span></span>Cake</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-7" />
-                                            <label for="category-7">
-                                                <span></span>Candles</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-8" />
-                                            <label for="category-8">
-                                                <span></span>Cosmetic</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-9" />
-                                            <label for="category-9">
-                                                <span></span>Furniture</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-10" />
-                                            <label for="category-10">
-                                                <span></span>Kids</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-11" />
-                                            <label for="category-11">
-                                                <span></span>Men</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-12" />
-                                            <label for="category-12">
-                                                <span></span>Organic</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-13" />
-                                            <label for="category-13">
-                                                <span></span>Plant</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-14" />
-                                            <label for="category-14">
-                                                <span></span>Shoes</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-15" />
-                                            <label for="category-15">
-                                                <span></span>Watch</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-16" />
-                                            <label for="category-16">
-                                                <span></span>Wines</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="category-17" />
-                                            <label for="category-17">
-                                                <span></span>Women</label>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1230,3 +1083,46 @@
 </main>
 
 @endsection
+
+@push('scripts')
+<script>
+          function fetchdata() {
+            $.ajax({
+                url: '{{ route('categroy.fetch') }}',
+                type: 'get',
+                success: function(response) {
+                    console.log(response)
+                    if (response.data.length > 0) {
+
+                        $('#categorydropdown').append(`
+                                <option selected disabled>Choose Category</option>
+                            `)
+                        for (let i = 0; i < response.data.length; i++) {
+                            var status = response.data[i]['Status']
+                            console.log(status)
+                            if(status == 0){
+
+                                $('#category-section').append(`
+                                   <li>
+                                            <input type="checkbox" id="category-1" value="`+ response.data[i]['id'] +`" />
+                                            <label for="category-1">
+                                                <span></span>` + response.data[i]['Category'] + `</label>
+                                        </li>
+
+                                `)
+                            }
+
+                        }
+                    } else {
+                        $('#category-section').append('<option selected disabled >No Data</option>')
+                    }
+                },
+                error: function(e) {
+                    console.log(e.responseText)
+                }
+            })
+        };
+        fetchdata();
+</script>
+
+@endpush

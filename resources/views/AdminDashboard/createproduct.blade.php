@@ -412,11 +412,7 @@
                                 <option value="`+ response.data[i]['id'] +`">` + response.data[i]['Category'] + `</option>
                                 `)
                             }
-                            else{
-                                $('#categorydropdown').append(`
-                                <option  disabled value="`+ response.data[i]['id'] +`">` + response.data[i]['Category'] + ` <p id='nonactive'>Non Active</p></option>
-                                `)
-                            }
+                          
                         }
                     } else {
                         $('#categorydropdown').append('<option selected disabled >No Data</option>')
