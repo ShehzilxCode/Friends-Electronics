@@ -15,6 +15,7 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="../dashboardasset/images/favicon.ico">
+    <link rel="stylesheet" href="../dashboardasset/css/style.css">
  <!-- Plugins css -->
  <link href="../dashboardasset/libs/dropzone/dropzone.css" rel="stylesheet" type="text/css" />
 
@@ -33,6 +34,7 @@
     <script src="../dashboardasset/js/layout.js"></script>
     <!-- Bootstrap Css -->
     <link href="../dashboardasset/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../dashboardasset/css/style.css" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="../dashboardasset/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->

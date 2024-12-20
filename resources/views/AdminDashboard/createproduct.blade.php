@@ -399,13 +399,24 @@
                 success: function(response) {
                     console.log(response)
                     if (response.data.length > 0) {
+
                         $('#categorydropdown').append(`
                                 <option selected disabled>Choose Category</option>
                             `)
                         for (let i = 0; i < response.data.length; i++) {
-                            $('#categorydropdown').append(`
+                            var status = response.data[i]['Status']
+                            console.log(status)
+                            if(status == 0){
+
+                                $('#categorydropdown').append(`
                                 <option value="`+ response.data[i]['id'] +`">` + response.data[i]['Category'] + `</option>
-                            `)
+                                `)
+                            }
+                            else{
+                                $('#categorydropdown').append(`
+                                <option  disabled value="`+ response.data[i]['id'] +`">` + response.data[i]['Category'] + ` <p id='nonactive'>Non Active</p></option>
+                                `)
+                            }
                         }
                     } else {
                         $('#categorydropdown').append('<option selected disabled >No Data</option>')

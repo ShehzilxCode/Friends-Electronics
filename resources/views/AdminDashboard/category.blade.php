@@ -240,7 +240,7 @@
                                                 </div>
                                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                                     <form id="delete-form">
-                                                        <input type="text" readonly id="delete-id">
+                                                        {{-- <input type="text" readonly id="delete-id"> --}}
                                                         <button type="button" class="btn w-sm btn-light"
                                                             data-bs-dismiss="modal">Close</button>
                                                         <button href="" type="submit" class="btn w-sm btn-danger"
@@ -355,7 +355,7 @@
                 }
             });
         });
-        // fetch work 
+        // fetch work
         function fetchdata() {
             $.ajax({
                 url: '{{ route('categroy.fetch') }}',
