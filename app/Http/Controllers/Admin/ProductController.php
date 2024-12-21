@@ -43,6 +43,7 @@ class ProductController extends Controller
         $product->discount = $request->productdiscount;
         $product->Total = $request->productTotal;
         $product->sku = $request->productsku;
+        $product->status = $request->productstatus;
         if($request->hasFile('productmainimage')) {
             $mainFile = $request->file('productmainimage');
             $mainFileName = time() . '_' . $mainFile->getClientOriginalName();

@@ -130,50 +130,6 @@
                                     </div>
                                 </div>
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingBrands">
-                                        <button class="accordion-button bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBrands" aria-expanded="true" aria-controls="flush-collapseBrands">
-                                            <span class="text-muted text-uppercase fs-12 fw-medium">Brands</span> <span class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
-                                        </button>
-                                    </h2>
-
-                                    <div id="flush-collapseBrands" class="accordion-collapse collapse show" aria-labelledby="flush-headingBrands">
-                                        <div class="accordion-body text-body pt-0">
-                                            <div class="search-box search-box-sm">
-                                                <input type="text" class="form-control bg-light border-0" id="searchBrandsList" placeholder="Search Brands...">
-                                                <i class="ri-search-line search-icon"></i>
-                                            </div>
-                                            <div class="d-flex flex-column gap-2 mt-3 filter-check">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Boat" id="productBrandRadio5" checked>
-                                                    <label class="form-check-label" for="productBrandRadio5">Boat</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="OnePlus" id="productBrandRadio4">
-                                                    <label class="form-check-label" for="productBrandRadio4">OnePlus</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Realme" id="productBrandRadio3">
-                                                    <label class="form-check-label" for="productBrandRadio3">Realme</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Sony" id="productBrandRadio2">
-                                                    <label class="form-check-label" for="productBrandRadio2">Sony</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="JBL" id="productBrandRadio1" checked>
-                                                    <label class="form-check-label" for="productBrandRadio1">JBL</label>
-                                                </div>
-
-                                                <div>
-                                                    <button type="button" class="btn btn-link text-decoration-none text-uppercase fw-medium p-0">1,235
-                                                        More</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end accordion-item -->
 
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingDiscount">

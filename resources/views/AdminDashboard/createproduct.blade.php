@@ -79,7 +79,7 @@
                                                 <h5 class="fs-14 mb-1">Product Gallery</h5>
                                                 <p class="text-muted">Add Product Gallery Images.</p>
 
-                                                <div class="dropzone">
+                                                <div class="">
                                                     <div class="fallback">
                                                         <input type="file" name="file[]" multiple accept="image/*" required>
                                                     </div>
@@ -213,8 +213,8 @@
                                             class="form-label">Visibility</label>
                                         <select name="productstatus" class="form-select" id="choices-publish-visibility-input" data-choices
                                             data-choices-search-false>
-                                            <option value="Public" selected>Public</option>
-                                            <option value="Hidden">Hidden</option>
+                                            <option value="0" selected>Public</option>
+                                            <option value="1">Hidden</option>
                                         </select>
                                     </div>
                                 </div>
@@ -433,7 +433,7 @@ $(document).ready(function () {
             '#insert-product',
             '#addproductbtn',
             "{{ route('product.create') }}",
-            "{{ route('product.dashboard.page') }}"
+            "{{ route('create.product') }}"
         );
     });
 });
