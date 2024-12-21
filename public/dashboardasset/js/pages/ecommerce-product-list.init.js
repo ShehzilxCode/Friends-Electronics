@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
     const BASE_IMAGE_URL = "/storage/";
 
     fetch('/admin/product/products')
@@ -9,227 +8,311 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then((productListAllData) => {
-            new gridjs.Grid({
-                columns: [
-                    {
-                        name: "#",
-                        width: "40px",
-                        sort: { enabled: false },
-                        data: function (e) {
-                            return gridjs.html(
-                                '<div class="form-check checkbox-product-list">\t\t\t\t\t<input class="form-check-input" type="checkbox" value="' +
-                                    e.id +
-                                    '" id="checkbox-' +
-                                    e.id +
-                                    '">\t\t\t\t\t<label class="form-check-label" for="checkbox-' +
-                                    e.id +
-                                    '"></label>\t\t\t\t  </div>'
-                            );
+            function renderNoResultMessage(containerId) {
+                document.getElementById(containerId).innerHTML = `
+                    <div class="py-4 text-center">
+                        <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:72px;height:72px"></lord-icon>
+                        <h5 class="mt-4">Sorry! No Result Found</h5>
+                    </div>`;
+            }
+            if (productListAllData.length > 0) {
+                new gridjs.Grid({
+                    columns: [
+                        {
+                            name: "#",
+                            width: "40px",
+                            sort: { enabled: false },
+                            data: function (e) {
+                                return gridjs.html(
+                                    '<div class="form-check checkbox-product-list">\t\t\t\t\t<input class="form-check-input" type="checkbox" value="' +
+                                        e.id +
+                                        '" id="checkbox-' +
+                                        e.id +
+                                        '">\t\t\t\t\t<label class="form-check-label" for="checkbox-' +
+                                        e.id +
+                                        '"></label>\t\t\t\t  </div>'
+                                );
+                            },
                         },
-                    },
-                    {
-                        name: "Product",
-                        width: "360px",
-                        data: function (e) {
-                            const imageUrl = e.main_image_path 
-                                ? BASE_IMAGE_URL + e.main_image_path 
-                                : BASE_IMAGE_URL + "default.png"; // Fallback to a default image
-                            return gridjs.html(
-                                '<div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="' +
-                                    imageUrl +
-                                    '" alt="' +
-                                    e.name +
-                                    '" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="#" class="text-body">' +
-                                    e.name +
-                                    '</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">' +
-                                    e.category_name +
-                                    "</span></p></div></div>"
-                            );
+                        {
+                            name: "Product",
+                            width: "360px",
+                            data: function (e) {
+                                const imageUrl = e.main_image_path 
+                                    ? BASE_IMAGE_URL + e.main_image_path 
+                                    : BASE_IMAGE_URL + "default.png"; // Fallback to a default image
+                                return gridjs.html(
+                                    '<div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="' +
+                                        imageUrl +
+                                        '" alt="' +
+                                        e.name +
+                                        '" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="#" class="text-body">' +
+                                        e.name +
+                                        '</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">' +
+                                        e.category_name +
+                                        "</span></p></div></div>"
+                                );
+                            },
                         },
-                    },
-                    { name: "Price", width: "94px", formatter: (e) => `$${e}` },
-                    {
-                        name: "Discount",
-                        width: "101px",
-                        formatter: function (e) {
-                            return gridjs.html("-" + e + "%");
+                        { name: "Price", width: "94px", formatter: (e) => `$${e}` },
+                        {
+                            name: "Discount",
+                            width: "101px",
+                            formatter: function (e) {
+                                return gridjs.html("-" + e + "%");
+                            },
                         },
-                    },
-                    { name: "SKU", width: "100px" },
-                    {
-                        name: "Status",
-                        width: "105px",
-                        formatter: function (e) {
-                            const statusLabel = e === 0 ? "Active" : "Inactive";
-                            const statusClass = e === 0 ? "bg-success" : "bg-danger";
-                            return gridjs.html(
-                                '<span class="badge ' +
-                                    statusClass +
-                                    ' text-white fs-12 fw-medium">' +
-                                    statusLabel +
-                                    "</span>"
-                            );
+                        { name: "SKU", width: "100px" },
+                        {
+                            name: "Status",
+                            width: "105px",
+                            formatter: function (e) {
+                                const statusLabel = e === 0 ? "Active" : "Inactive";
+                                const statusClass = e === 0 ? "bg-success" : "bg-danger";
+                                return gridjs.html(
+                                    '<span class="badge ' +
+                                        statusClass +
+                                        ' text-white fs-12 fw-medium">' +
+                                        statusLabel +
+                                        "</span>"
+                                );
+                            },
                         },
-                    },
-                    {
-                        name: "Description",
-                        width: "220px",
-                        data: function (e) {
-                            return gridjs.html(e.description);
+                        {
+                            name: "Description",
+                            width: "220px",
+                            data: function (e) {
+                                return gridjs.html(e.description);
+                            },
                         },
-                    },
-                    {
-                        name: "Action",
-                        width: "80px",
-                        sort: { enabled: false },
-                        formatter: function (e, t) {
-                            t = new DOMParser()
-                                .parseFromString(t._cells[0].data.props.content, "text/html")
-                                .body.querySelector(".checkbox-product-list .form-check-input").value;
-                            return gridjs.html(
-                                '<div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id=' +
-                                    t +
-                                    ' href="#"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id=' +
-                                    t +
-                                    ' data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div>'
-                            );
+                        {
+                            name: "Action",
+                            width: "80px",
+                            sort: { enabled: false },
+                            formatter: function (e, t) {
+                                t = new DOMParser()
+                                    .parseFromString(t._cells[0].data.props.content, "text/html")
+                                    .body.querySelector(".checkbox-product-list .form-check-input").value;
+                                return gridjs.html(
+                                    '<div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id=' +
+                                        t +
+                                        ' href="#"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id=' +
+                                        t +
+                                        ' data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div>'
+                                );
+                            },
                         },
-                    },
-                ],
-                className: { th: "text-muted" },
-                pagination: { limit: 10 },
-                sort: true,
-                data: productListAllData,
-            }).render(document.getElementById("table-product-list-all"));
+                    ],
+                    className: { th: "text-muted" },
+                    pagination: { limit: 10 },
+                    sort: true,
+                    data: productListAllData,
+                }).render(document.getElementById("table-product-list-all"));
+            } else {
+                renderNoResultMessage("table-product-list-all");
+            }
+            const productListPublishedData = productListAllData.filter(
+                (product) => product.status === 0
+            );
+            if(productListPublishedData.length > 0) {
+                new gridjs.Grid({
+                    columns: [
+                        {
+                            name: "#",
+                            width: "40px",
+                            sort: { enabled: false },
+                            data: function (e) {
+                                return gridjs.html(
+                                    '<div class="form-check checkbox-product-list">\t\t\t\t\t<input class="form-check-input" type="checkbox" value="' +
+                                        e.id +
+                                        '" id="checkbox-' +
+                                        e.id +
+                                        '">\t\t\t\t\t<label class="form-check-label" for="checkbox-' +
+                                        e.id +
+                                        '"></label>\t\t\t\t  </div>'
+                                );
+                            },
+                        },
+                        {
+                            name: "Product",
+                            width: "360px",
+                            data: function (e) {
+                                const imageUrl = e.main_image_path
+                                    ? BASE_IMAGE_URL + e.main_image_path
+                                    : BASE_IMAGE_URL + "default.png"; // Fallback to a default image
+                                return gridjs.html(
+                                    '<div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="' +
+                                        imageUrl +
+                                        '" alt="' +
+                                        e.name +
+                                        '" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="#" class="text-body">' +
+                                        e.name +
+                                        '</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">' +
+                                        e.category_name +
+                                        "</span></p></div></div>"
+                                );
+                            },
+                        },
+                        { name: "Price", width: "94px", formatter: (e) => `$${e}` },
+                        {
+                            name: "Discount",
+                            width: "101px",
+                            formatter: function (e) {
+                                return gridjs.html("-" + e + "%");
+                            },
+                        },
+                        { name: "SKU", width: "100px" },
+                        {
+                            name: "Status",
+                            width: "105px",
+                            formatter: function (e) {
+                                const statusLabel = e === 0 ? "Active" : "Inactive";
+                                const statusClass = e === 0 ? "bg-success" : "bg-danger";
+                                return gridjs.html(
+                                    '<span class="badge ' +
+                                        statusClass +
+                                        ' text-white fs-12 fw-medium">' +
+                                        statusLabel +
+                                        "</span>"
+                                );
+                            },
+                        },
+                        {
+                            name: "Description",
+                            width: "220px",
+                            data: function (e) {
+                                return gridjs.html(e.description);
+                            },
+                        },
+                        {
+                            name: "Action",
+                            width: "80px",
+                            sort: { enabled: false },
+                            formatter: function (e, t) {
+                                t = new DOMParser()
+                                    .parseFromString(t._cells[0].data.props.content, "text/html")
+                                    .body.querySelector(".checkbox-product-list .form-check-input").value;
+                                return gridjs.html(
+                                    '<div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id=' +
+                                        t +
+                                        ' href="#"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id=' +
+                                        t +
+                                        ' data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div>'
+                                );
+                            },
+                        },
+                    ],
+                    className: { th: "text-muted" },
+                    pagination: { limit: 10 },
+                    sort: true,
+                    data: productListPublishedData,
+                }).render(document.getElementById("table-product-list-published"));
+            } else {
+                renderNoResultMessage("table-product-list-published");
+            }
+            const productListUnpublishedData = productListAllData.filter(
+                (product) => product.status === 1
+            );
+            if (productListUnpublishedData.length > 0) {
+                new gridjs.Grid({
+                    columns: [
+                        {
+                            name: "#",
+                            width: "40px",
+                            sort: { enabled: false },
+                            data: function (e) {
+                                return gridjs.html(
+                                    '<div class="form-check checkbox-product-list">\t\t\t\t\t<input class="form-check-input" type="checkbox" value="' +
+                                        e.id +
+                                        '" id="checkbox-' +
+                                        e.id +
+                                        '">\t\t\t\t\t<label class="form-check-label" for="checkbox-' +
+                                        e.id +
+                                        '"></label>\t\t\t\t  </div>'
+                                );
+                            },
+                        },
+                        {
+                            name: "Product",
+                            width: "360px",
+                            data: function (e) {
+                                const imageUrl = e.main_image_path
+                                    ? BASE_IMAGE_URL + e.main_image_path
+                                    : BASE_IMAGE_URL + "default.png"; // Fallback to a default image
+                                return gridjs.html(
+                                    '<div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="' +
+                                        imageUrl +
+                                        '" alt="' +
+                                        e.name +
+                                        '" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="#" class="text-body">' +
+                                        e.name +
+                                        '</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">' +
+                                        e.category_name +
+                                        "</span></p></div></div>"
+                                );
+                            },
+                        },
+                        { name: "Price", width: "94px", formatter: (e) => `$${e}` },
+                        {
+                            name: "Discount",
+                            width: "101px",
+                            formatter: function (e) {
+                                return gridjs.html("-" + e + "%");
+                            },
+                        },
+                        { name: "SKU", width: "100px" },
+                        {
+                            name: "Status",
+                            width: "105px",
+                            formatter: function (e) {
+                                const statusLabel = e === 0 ? "Active" : "Inactive";
+                                const statusClass = e === 0 ? "bg-success" : "bg-danger";
+                                return gridjs.html(
+                                    '<span class="badge ' +
+                                        statusClass +
+                                        ' text-white fs-12 fw-medium">' +
+                                        statusLabel +
+                                        "</span>"
+                                );
+                            },
+                        },
+                        {
+                            name: "Description",
+                            width: "220px",
+                            data: function (e) {
+                                return gridjs.html(e.description);
+                            },
+                        },
+                        {
+                            name: "Action",
+                            width: "80px",
+                            sort: { enabled: false },
+                            formatter: function (e, t) {
+                                t = new DOMParser()
+                                    .parseFromString(t._cells[0].data.props.content, "text/html")
+                                    .body.querySelector(".checkbox-product-list .form-check-input").value;
+                                return gridjs.html(
+                                    '<div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="#"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item edit-list" data-edit-id=' +
+                                        t +
+                                        ' href="#"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id=' +
+                                        t +
+                                        ' data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div>'
+                                );
+                            },
+                        },
+                    ],
+                    className: { th: "text-muted" },
+                    pagination: { limit: 10 },
+                    sort: true,
+                    data: productListUnpublishedData,
+                }).render(document.getElementById("table-product-list-unpublished"));
+            } else {
+                renderNoResultMessage("table-product-list-unpublished");
+            }
         })
         .catch((error) => {
             console.error("Error fetching product data:", error);
         });
-    
-    
-});
-
-productListPublishedData = [
-    {
-        id: 1,
-        product: { img: "assets/images/products/img-2.png", title: "Urban Ladder Pashe Chair", category: "Furniture" },
-        stock: "06",
-        price: "160.00",
-        orders: "30",
-        rating: "4.3",
-        published: { publishDate: "06 Jan, 2021", publishTime: "01:31 PM" },
-    },
-    {
-        id: 2,
-        product: { img: "assets/images/products/img-6.png", title: "Half Sleeve T-Shirts (Blue)", category: "Fashion" },
-        stock: "15",
-        price: "125.00",
-        orders: "48",
-        rating: "4.2",
-        published: { publishDate: "12 Oct, 2021", publishTime: "04:55 PM" },
-    },
-    {
-        id: 3,
-        product: { img: "assets/images/products/img-4.png", title: "Fabric Dual Tone Living Room Chair", category: "Furniture" },
-        stock: "15",
-        price: "140.00",
-        orders: "40",
-        rating: "4.2",
-        published: { publishDate: "19 Apr, 2021", publishTime: "02:51 PM" },
-    },
-    {
-        id: 4,
-        product: { img: "assets/images/products/img-4.png", title: "350 ml Glass Grocery Container", category: "Grocery" },
-        stock: "10",
-        price: "125.00",
-        orders: "48",
-        rating: "4.5",
-        published: { publishDate: "26 Mar, 2021", publishTime: "11:40 AM" },
-    },
-    {
-        id: 5,
-        product: { img: "assets/images/products/img-5.png", title: "Crux Motorsports Helmet", category: "Automotive Accessories" },
-        stock: "08",
-        price: "135.00",
-        orders: "55",
-        rating: "4.4",
-        published: { publishDate: "30 Mar, 2021", publishTime: "09:42 AM" },
-    },
-],
-productListPublished = new gridjs.Grid({
-    columns: [
-        {
-            name: "#",
-            width: "40px",
-            sort: { enabled: !1 },
-            formatter: function (e) {
-                return gridjs.html(
-                    '<div class="form-check checkbox-product-list">\t\t\t\t\t<input class="form-check-input" type="checkbox" value="' +
-                        e +
-                        '" id="checkboxpublished-' +
-                        e +
-                        '">\t\t\t\t\t<label class="form-check-label" for="checkbox-' +
-                        e +
-                        '"></label>\t\t\t\t  </div>'
-                );
-            },
-        },
-        {
-            name: "Product",
-            width: "360px",
-            data: function (e) {
-                return gridjs.html(
-                    '<div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="' +
-                        e.product.img +
-                        '" alt="" class="img-fluid d-block"></div></div><div class="flex-grow-1"><h5 class="fs-14 mb-1"><a href="apps-ecommerce-product-details.html" class="text-body">' +
-                        e.product.title +
-                        '</a></h5><p class="text-muted mb-0">Category : <span class="fw-medium">' +
-                        e.product.category +
-                        "</span></p></div></div>"
-                );
-            },
-        },
-        { name: "Stock", width: "94px" },
-        {
-            name: "Price",
-            width: "101px",
-            formatter: function (e) {
-                return gridjs.html("$" + e);
-            },
-        },
-        { name: "Orders", width: "84px" },
-        {
-            name: "Rating",
-            width: "105px",
-            formatter: function (e) {
-                return gridjs.html('<span class="badge bg-light text-body fs-12 fw-medium"><i class="mdi mdi-star text-warning me-1"></i>' + e + "</span></td>");
-            },
-        },
-        {
-            name: "Published",
-            width: "220px",
-            data: function (e) {
-                return gridjs.html(e.published.publishDate + '<small class="text-muted ms-1">' + e.published.publishTime + "</small>");
-            },
-        },
-        {
-            name: "Action",
-            width: "80px",
-            sort: { enabled: !1 },
-            formatter: function (e, t) {
-                return gridjs.html(
-                    '<div class="dropdown"><button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></button><ul class="dropdown-menu dropdown-menu-end"><li><a class="dropdown-item" href="apps-ecommerce-product-details.html"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li><li><a class="dropdown-item" href="apps-ecommerce-add-product.html"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li><li class="dropdown-divider"></li><li><a class="dropdown-item remove-list" href="#" data-id=' +
-                        t._cells[0].data +
-                        ' data-bs-toggle="modal" data-bs-target="#removeItemModal"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li></ul></div>'
-                );
-            },
-        },
-    ],
-    className: { th: "text-muted" },
-    pagination: { limit: 10 },
-    sort: !0,
-    data: productListPublishedData,
-}).render(document.getElementById("table-product-list-published")),
 searchProductList = document.getElementById("searchProductList"),
 slider =
     (searchProductList.addEventListener("keyup", function () {

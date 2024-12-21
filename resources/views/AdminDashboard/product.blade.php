@@ -28,7 +28,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="card">
                             <div class="card-header">
-                                <div class="d-flex mb-3">
+                                <div class="d-flex">
                                     <div class="flex-grow-1">
                                         <h5 class="fs-16">Filters</h5>
                                     </div>
@@ -37,9 +37,6 @@
                                     </div>
                                 </div>
 
-                                <div class="filter-choices-input">
-                                    <input class="form-control" data-choices data-choices-removeItem type="text" id="filter-choices-input" value="T-Shirts" />
-                                </div>
                             </div>
 
                             <div class="accordion accordion-flush filter-accordion">
@@ -283,8 +280,8 @@
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-draft" role="tab">
-                                                        Draft
+                                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-unpublished" role="tab">
+                                                        Unpublished
                                                     </a>
                                                 </li>
                                             </ul>
@@ -312,12 +309,8 @@
                                         </div>
                                         <!-- end tab pane -->
 
-                                        <div class="tab-pane" id="productnav-draft" role="tabpanel">
-                                            <div class="py-4 text-center">
-                                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:72px;height:72px">
-                                                </lord-icon>
-                                                <h5 class="mt-4">Sorry! No Result Found</h5>
-                                            </div>
+                                        <div class="tab-pane" id="productnav-unpublished" role="tabpanel">
+                                            <div id="table-product-list-unpublished" class="table-card gridjs-border-none"></div>
                                         </div>
                                         <!-- end tab pane -->
                                     </div>
