@@ -113,7 +113,7 @@
                                             </tbody>
                                         </table>
                                         <div class="noresult" style="display: none">
-                                            
+
                                             <div class="text-center">
                                                 <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
                                                     colors="primary:#121331,secondary:#08a88a"
@@ -231,7 +231,7 @@
                                                 </div>
                                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                                     <form id="delete-form">
-                                                        {{-- <input type="text" readonly id="delete-id"> --}}
+                                                        <input type="hidden" readonly id="delete-id">
                                                         <button type="button" class="btn w-sm btn-light"
                                                             data-bs-dismiss="modal">Close</button>
                                                         <button href="" type="submit" class="btn w-sm btn-danger"
@@ -429,12 +429,12 @@ function generatePagination(response) {
     $('#pagination').append(`
         <div class="d-flex justify-content-end">
             <div class="pagination-wrap hstack gap-2">
-                <a class="page-item pagination-prev ${currentPage === 1 ? 'disabled' : ''}" 
+                <a class="page-item pagination-prev ${currentPage === 1 ? 'disabled' : ''}"
                    href="#" onclick="fetchdata(${currentPage - 1})">
                    Previous
                 </a>
                 <ul class="pagination listjs-pagination mb-0" id="pagination-numbers"></ul>
-                <a class="page-item pagination-next ${currentPage === lastPage ? 'disabled' : ''}" 
+                <a class="page-item pagination-next ${currentPage === lastPage ? 'disabled' : ''}"
                    href="#" onclick="fetchdata(${currentPage + 1})">
                    Next
                 </a>
@@ -452,7 +452,7 @@ function generatePagination(response) {
     }
 }
 
-     
+
 
         // update work
         function fetchCategoryDetails(categoryId) {
@@ -551,15 +551,16 @@ function generatePagination(response) {
         // delete work
         function getrecord(id) {
             var id = id
-            console.log(id);
-            $('#delete-id').val(id);
+            var idval = $('#delete-id').val(id);
+            // console.log(id);
+            // console.log(idval);
         }
 
         $(document).ready(function() {
             $('#delete-modal').submit(function(e) {
                 e.preventDefault();
                 var inputid = $('#delete-id').val();
-                console.log(inputid)
+                // console.log(inputid)
 
                 $.ajax({
                     url: '{{ route('delete.record', ':id') }}'.replace(':id',
