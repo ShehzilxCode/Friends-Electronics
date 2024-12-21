@@ -36,10 +36,9 @@ class CategoryController extends Controller
 
 }
 public function fetch(){
-    $fetchcategory = Category::orderBy('id', 'desc')->get(); //desc is not description its descending order
-    return response()->json([
-        'data' => $fetchcategory
-    ]);
+    $categories = Category::orderBy('id', 'desc')->paginate(10); // Descending order and paginate
+    return response()->json($categories);
+    
 }
 
 

@@ -113,6 +113,7 @@
                                             </tbody>
                                         </table>
                                         <div class="noresult" style="display: none">
+                                            
                                             <div class="text-center">
                                                 <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
                                                     colors="primary:#121331,secondary:#08a88a"
@@ -123,18 +124,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end">
-                                        <div class="pagination-wrap hstack gap-2">
-                                            <a class="page-item pagination-prev disabled" href="#">
-                                                Previous
-                                            </a>
-                                            <ul class="pagination listjs-pagination mb-0"></ul>
-                                            <a class="page-item pagination-next" href="#">
-                                                Next
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div id="pagination" class="d-flex justify-content-end mt-4"></div>
+
                                 {{-- insert model  --}}
                                 <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -356,66 +347,113 @@
             });
         });
         // fetch work
-        function fetchdata() {
-            $.ajax({
-                url: '{{ route('categroy.fetch') }}',
-                type: 'get',
-                success: function(response) {
-                    // console.log(response)
-                    if (response.data.length > 0) {
-                        $('#categorydropdown').append(`
-                                <option selected disabled>Choose Category</option>
-                            `)
-                        for (let i = 0; i < response.data.length; i++) {
-                            let statusText = response.data[i]['Status'] === 0 ? 'Active' : 'Inactive';
-                            let badgeClass = response.data[i]['Status'] === 0 ?
-                                'bg-success-subtle text-success' : 'bg-danger-subtle text-danger';
-                            let createdAt = new Date(response.data[i]['created_at']);
-                            let formattedDate = createdAt.toLocaleString('en-US', {
-                                year: 'numeric',
-                                month: '2-digit',
-                                day: '2-digit',
-                                hour: '2-digit',
-                                minute: '2-digit',
-                                hour12: true
-                            });
+        function fetchdata(page = 1) {
+    $.ajax({
+        url: '{{ route('categroy.fetch') }}',
+        type: 'get',
+        data: { page: page }, // Pass the current page to the backend
+        success: function(response) {
+            $('#tbody').empty();
+            $('#categorydropdown').empty();
 
-                            $('#tbody').append(`
-                                <tr>
-                                     <td>` + (i+1) + `</td>
-                                    <td>` + response.data[i]['Category'] + `</td>
-                                    <td>` + formattedDate + `</td>
-                                    <td>  <span class="badge ` + badgeClass + ` text-uppercase">` + statusText +
-                                `</td>
-                                    <td>
-                               <ul class="list-inline hstack gap-2 mb-0">
-                                   <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"  title="Edit">
-                                       <a href="#updatemodal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn" onclick="fetchCategoryDetails(` +
-                                response.data[i]['id'] +
-                                `)">
-                                        <i class="ri-pencil-fill fs-16"></i>
-                                      </a>
-                                   </li>
-                                   <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                      <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#delete-modal" onclick="getrecord(` +
-                                response.data[i]['id'] + `)">
-                                           <i class="ri-delete-bin-5-fill fs-16"></i>
-                                      </a>
-                                 </li>
-                             </ul>
-                          </td>
-                                </tr>
-                            `)
-                        }
-                    } else {
-                        $('#categorydropdown').append('<option selected disabled >No Data</option>')
-                    }
-                },
-                error: function(e) {
-                    console.log(e.responseText)
-                }
-            })
-        };
+            if (response.data.length > 0) {
+                $('#categorydropdown').append(`
+                    <option selected disabled>Choose Category</option>
+                `);
+
+                let perPage = response.perPage || 10; // Replace 10 with the default items per page if not provided
+                let serialNumber = (page - 1) * perPage + 1;
+
+                response.data.forEach(item => {
+                    let statusText = item.Status === 0 ? 'Active' : 'Inactive';
+                    let badgeClass = item.Status === 0 ?
+                        'bg-success-subtle text-success' : 'bg-danger-subtle text-danger';
+                    let createdAt = new Date(item.created_at);
+                    let formattedDate = createdAt.toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    });
+
+                    $('#tbody').append(`
+                        <tr>
+                            <td>${serialNumber}</td>
+                            <td>${item.Category}</td>
+                            <td>${formattedDate}</td>
+                            <td><span class="badge ${badgeClass} text-uppercase">${statusText}</span></td>
+                            <td>
+                                <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                        <a href="#updatemodal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn" onclick="fetchCategoryDetails(${item.id})">
+                                            <i class="ri-pencil-fill fs-16"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#delete-modal" onclick="getrecord(${item.id})">
+                                            <i class="ri-delete-bin-5-fill fs-16"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    `);
+
+                    // Increment serial number
+                    serialNumber++;
+                });
+
+                // Generate Next and Previous buttons
+                generatePagination(response);
+            } else {
+                $('#categorydropdown').append('<option selected disabled>No Data</option>');
+            }
+        },
+        error: function(e) {
+            console.log(e.responseText);
+        }
+    });
+}
+
+
+
+function generatePagination(response) {
+    $('#pagination').empty(); // Clear existing pagination controls
+
+    let currentPage = response.current_page;
+    let lastPage = response.last_page;
+
+    // Start of pagination wrap
+    $('#pagination').append(`
+        <div class="d-flex justify-content-end">
+            <div class="pagination-wrap hstack gap-2">
+                <a class="page-item pagination-prev ${currentPage === 1 ? 'disabled' : ''}" 
+                   href="#" onclick="fetchdata(${currentPage - 1})">
+                   Previous
+                </a>
+                <ul class="pagination listjs-pagination mb-0" id="pagination-numbers"></ul>
+                <a class="page-item pagination-next ${currentPage === lastPage ? 'disabled' : ''}" 
+                   href="#" onclick="fetchdata(${currentPage + 1})">
+                   Next
+                </a>
+            </div>
+        </div>
+    `);
+
+    // Add page numbers
+    for (let i = 1; i <= lastPage; i++) {
+        $('#pagination-numbers').append(`
+            <li class="page-item ${i === currentPage ? 'active' : ''}">
+                <a class="page-link" href="#" onclick="fetchdata(${i})">${i}</a>
+            </li>
+        `);
+    }
+}
+
+     
+
         // update work
         function fetchCategoryDetails(categoryId) {
             $.ajax({
@@ -568,7 +606,6 @@
                 })
             });
         })
-
 
         fetchdata();
     </script>

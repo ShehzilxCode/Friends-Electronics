@@ -1917,6 +1917,8 @@
     {{-- <script src="../../../../unpkg.com/gridjs%406.1.1/plugins/selection/dist/selection.umd.js"></script> --}}
     <!-- ecommerce product list -->
     <script src="../dashboardasset/js/pages/ecommerce-product-list.init.js"></script>
+    <!-- ecommerce product list -->
+    <script src="../dashboardasset/js/pages/ecommerce-category-list.init.js"></script>
     <!-- App js -->
      <!-- ckeditor -->
      <script src="../dashboardasset/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
