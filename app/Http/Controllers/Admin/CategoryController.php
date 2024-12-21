@@ -38,7 +38,7 @@ class CategoryController extends Controller
 public function fetch(){
     $categories = Category::orderBy('id', 'desc')->paginate(10); // Descending order and paginate
     return response()->json($categories);
-    
+
 }
 
 
@@ -103,6 +103,16 @@ public function deleterecord($id){
     }
 
 }
+// sorting
+
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    $categories = Category::where('Category', 'LIKE', "%{$query}%")->get();
+
+    return response()->json(['data' => $categories]);
+}
+
 
 
 

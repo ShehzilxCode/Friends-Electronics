@@ -52,6 +52,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/getrecord', 'getrecord')->name('get.record'); //get Update category
             Route::post('/update', 'updaterecord')->name('update.record'); //Update category
             Route::post('/destroy/{id}', 'deleterecord')->name('delete.record');
+            Route::get('/categories/search',  'search')->name('categories.search');
 
         });
     });
@@ -65,8 +66,7 @@ Route::prefix('admin')->group(function () {
 
 });
 
-
-
+// sorting route
 //User Auth routes
 
 Route::controller(UserController::class)->prefix('users')->group(function (){
