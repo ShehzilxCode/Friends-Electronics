@@ -59,7 +59,7 @@ Route::prefix('admin')->group(function () {
     Route::controller(AdminProductController::class)->group(function () {
         Route::prefix('product')->group(function () {
             Route::post('/addproduct', 'create')->name('product.create'); //Admin Product Create
-            // Route::get('/fetchcategory', 'fetch')->name('product.fetch');
+            Route::get('/products', [AdminProductController::class, 'fetch'])->name('products.get'); // Admin Product Fetch
         });
     });
 

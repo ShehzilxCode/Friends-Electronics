@@ -78,4 +78,24 @@ class ProductController extends Controller
             'message' => 'Product created successfully!',
         ]);
     }
+
+    public function fetch(Request $request)
+    {
+        $products = product::with('category')->get(); // Eager load category relation
+
+        return $products->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'category_name' => $product->category->Category ?? 'Uncategorized',
+                'description' => $product->description,
+                'price' => $product->price,
+                'discount' => $product->discount,
+                'main_image_path' => $product->main_image_path,
+                'sku' => $product->sku,
+                'status' => $product->status,
+            ];
+        });
+        
+    }
 }
