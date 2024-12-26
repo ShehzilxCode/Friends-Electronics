@@ -29,11 +29,11 @@ class UserController extends Controller
     public function cart(){
         return view('UserUI.cart');
     }
-    
+
     public function myaccount(){
         return view('UserUI.myaccount');
     }
-    
+
     public function checkout(){
         return view('UserUI.checkout');
     }

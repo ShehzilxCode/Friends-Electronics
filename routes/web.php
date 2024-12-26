@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController as FUserController;
 use App\Http\Controllers\User\UserController as UserController;
+use App\Http\Controllers\User\ProductController;
 
 //Admin Controllers
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -67,9 +68,8 @@ Route::prefix('admin')->group(function () {
 
 });
 
-// sorting route
-//User Auth routes
 
+//User Auth routes
 Route::controller(UserController::class)->prefix('users')->group(function (){
     Route::get('/login', 'login')->name('users.login'); // User Login
     Route::get('/register', 'register')->name('users.register'); // User Register
