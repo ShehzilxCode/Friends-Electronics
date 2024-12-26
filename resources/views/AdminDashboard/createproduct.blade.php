@@ -75,14 +75,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                            <div id="product-images-dropzone">
                                                 <h5 class="fs-14 mb-1">Product Gallery</h5>
                                                 <p class="text-muted">Add Product Gallery Images.</p>
 
-                                                <div class="">
-                                                    <div class="fallback">
-                                                        <input type="file" name="file[]" multiple accept="image/*" required>
-                                                    </div>
+                                                <div class="dropzone">
+                                                    <input type="file" name="file[]" multiple accept="image/*" required>  
                                                     <div class="dz-message needsclick">
                                                         <div class="mb-3">
                                                             <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
@@ -421,41 +419,35 @@
                 }
             })
         };
-        fetchdata();
+        fetchdata(); 
 
+
+    
 $(document).ready(function () {
-    $('#insert-product').on('submit', function (e) {
-        e.preventDefault();
-        handleFormUploadForm(
-            'POST',
-            '#insert-product',
-            '#addproductbtn',
-            "{{ route('product.create') }}",
-            "{{ route('create.product') }}"
+    e.preventDefault();
+
+    handleFormUploadForm(
+        'POST',
+        '#insert-product',
+        '#addproductbtn',
+        "{{ route('product.create') }}",
+        "{{ route('create.product') }}" // Redirection URL
+    );
+});
+
+
+document.querySelector("#product-image-input").addEventListener("change", function () {
+        var e = document.querySelector("#product-img"),
+            t = document.querySelector("#product-image-input").files[0],
+            o = new FileReader();
+        o.addEventListener(
+            "load",
+            function () {
+                e.src = o.result;
+            },
+            false
         );
+        if (t) o.readAsDataURL(t);
     });
-});
-
-// calculate total
-document.addEventListener("DOMContentLoaded", function () {
-    const priceInput = document.getElementById("product-price-input");
-    const discountInput = document.getElementById("product-discount-input");
-    const totalOutput = document.getElementById("total");
-
-    function calculateTotal() {
-        const price = parseFloat(priceInput.value) || 0;
-        const discount = parseFloat(discountInput.value) || 0;
-
-        const discountedPrice = price - (price * (discount / 100));
-
-        totalOutput.textContent = discountedPrice.toFixed(1) + "/-";
-    }
-
-    priceInput.addEventListener("keyup", calculateTotal);
-    discountInput.addEventListener("keyup", calculateTotal);
-});
-
-
-
     </script>
 @endpush

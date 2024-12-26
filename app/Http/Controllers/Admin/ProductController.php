@@ -24,7 +24,7 @@ class ProductController extends Controller
             // 'productTotal' => 'required|numeric',
             'productsku' => 'required|numeric',
             'productmainimage' => 'required|mimes:jpg,jpeg,png,gif|max:2048',
-            'file.*' => 'required|mimes:jpg,jpeg,png,gif|max:2048',
+            'file.*' => 'nullable|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
 
@@ -52,35 +52,26 @@ class ProductController extends Controller
         }
 
         // total working here
-
         $total = $product->price ;
         $discount = $total * ($product->discount / 100);
         $finaltotal = $total-$discount;
         $product->Total = $finaltotal;
         $product->save();
 
-        \Log::info('Files received:', ['files' => $request->file('file')]);
         \Log::info('Request Data:', $request->all());
-        \Log::info('Files Received:', $request->file());
+        \Log::info('Request Files:', $request->file('file') ?? []);
 
-
-        if ($request->hasFile('file') && count($request->file('file')) > 0) {
+        if ($request->hasFile('file')) {
             foreach ($request->file('file') as $file) {
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('product_images', $fileName, 'public');
+                $filePath = $file->storeAs('product_images', $fileName, 'public'); // Store the file
                 ProductImage::create([
                     'product_id' => $product->id,
                     'image_path' => $filePath,
                 ]);
             }
-        } else {
-            return response()->json([
-                'status' => 'warning',
-                'message' => 'No gallery images uploaded.',
-            ]);
-        }
-
-
+        } 
+    
         return response()->json([
             'status' => 'success',
             'message' => 'Product created successfully!',

@@ -175,68 +175,6 @@
                                 </div>
                                 <!-- end accordion-item -->
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingRating">
-                                        <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRating" aria-expanded="false" aria-controls="flush-collapseRating">
-                                            <span class="text-muted text-uppercase fs-12 fw-medium">Rating</span> <span class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
-                                        </button>
-                                    </h2>
-
-                                    <div id="flush-collapseRating" class="accordion-collapse collapse" aria-labelledby="flush-headingRating">
-                                        <div class="accordion-body text-body">
-                                            <div class="d-flex flex-column gap-2 filter-check">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="4 & Above Star" id="productratingRadio4" checked>
-                                                    <label class="form-check-label" for="productratingRadio4">
-                                                        <span class="text-muted">
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                        </span> 4 & Above
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="3 & Above Star" id="productratingRadio3">
-                                                    <label class="form-check-label" for="productratingRadio3">
-                                                        <span class="text-muted">
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                        </span> 3 & Above
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="2 & Above Star" id="productratingRadio2">
-                                                    <label class="form-check-label" for="productratingRadio2">
-                                                        <span class="text-muted">
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                        </span> 2 & Above
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="1 Star" id="productratingRadio1">
-                                                    <label class="form-check-label" for="productratingRadio1">
-                                                        <span class="text-muted">
-                                                            <i class="mdi mdi-star text-warning"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                            <i class="mdi mdi-star"></i>
-                                                        </span> 1
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <!-- end accordion-item -->
                             </div>
                         </div>
@@ -251,7 +189,7 @@
                                     <div class="row g-4">
                                         <div class="col-sm-auto">
                                             <div>
-                                                <a href="apps-ecommerce-add-product.html" class="btn btn-success" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Add Product</a>
+                                                <a href="{{ route('create.product') }}" class="btn btn-success" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Add Product</a>
                                             </div>
                                         </div>
                                         <div class="col-sm">
