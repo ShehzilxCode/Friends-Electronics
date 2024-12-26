@@ -21,7 +21,7 @@ class ProductController extends Controller
             'productdesc' => 'required|string',
             'productprice' => 'required|numeric',
             'productdiscount' => 'required|numeric',
-            'productTotal' => 'required|numeric',
+            // 'productTotal' => 'required|numeric',
             'productsku' => 'required|numeric',
             'productmainimage' => 'required|mimes:jpg,jpeg,png,gif|max:2048',
             'file.*' => 'required|mimes:jpg,jpeg,png,gif|max:2048',
@@ -41,7 +41,7 @@ class ProductController extends Controller
         $product->description = $request->productdesc;
         $product->price = $request->productprice;
         $product->discount = $request->productdiscount;
-        $product->Total = $request->productTotal;
+        // $product->Total = $request->productTotal;
         $product->sku = $request->productsku;
         $product->status = $request->productstatus;
         if($request->hasFile('productmainimage')) {
@@ -50,6 +50,13 @@ class ProductController extends Controller
             $mainFilePath = $mainFile->storeAs('products', $mainFileName, 'public');
             $product->main_image_path = $mainFilePath;
         }
+
+        // total working here
+
+        $total = $product->price ;
+        $discount = $total * ($product->discount / 100);
+        $finaltotal = $total-$discount;
+        $product->Total = $finaltotal;
         $product->save();
 
         \Log::info('Files received:', ['files' => $request->file('file')]);
@@ -73,7 +80,7 @@ class ProductController extends Controller
             ]);
         }
 
-    
+
         return response()->json([
             'status' => 'success',
             'message' => 'Product created successfully!',
@@ -97,6 +104,6 @@ class ProductController extends Controller
                 'status' => $product->status,
             ];
         });
-        
+
     }
 }

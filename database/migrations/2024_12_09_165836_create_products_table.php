@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 10, 2); 
-            $table->decimal('discount', 10, 2);
-            $table->decimal('Total', 10, 2);
+            $table->integer('price' );
+            $table->integer('discount');
+            $table->integer('Total');
             $table->integer('sku');
-            $table->unsignedBigInteger('category_id'); 
+            $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')
                     ->references('id')
                     ->on('categories')

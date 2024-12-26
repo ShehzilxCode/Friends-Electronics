@@ -16,12 +16,13 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="../dashboardasset/images/favicon.ico">
     <link rel="stylesheet" href="../dashboardasset/css/style.css">
- <!-- Plugins css -->
- <link href="../dashboardasset/libs/dropzone/dropzone.css" rel="stylesheet" type="text/css" />
+    <!-- Plugins css -->
+    <link href="../dashboardasset/libs/dropzone/dropzone.css" rel="stylesheet" type="text/css" />
 
     <!-- nouisliderribute css -->
     <link rel="stylesheet" href="../dashboardasset/libs/nouislider/nouislider.min.css">
-
+    {{-- custom css --}}
+    <link rel="stylesheet" href="../dashboardasset/css/custom.css">
     <!-- gridjs css -->
     <link rel="stylesheet" href="../dashboardasset/libs/gridjs/theme/mermaid.min.css">
     <!-- jsvectormap css -->
@@ -305,13 +306,15 @@
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="../dashboardasset/images/brands/bitbucket.png" alt="bitbucket">
+                                                <img src="../dashboardasset/images/brands/bitbucket.png"
+                                                    alt="bitbucket">
                                                 <span>Bitbucket</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#!">
-                                                <img src="../dashboardasset/images/brands/dribbble.png" alt="dribbble">
+                                                <img src="../dashboardasset/images/brands/dribbble.png"
+                                                    alt="dribbble">
                                                 <span>Dribbble</span>
                                             </a>
                                         </div>
@@ -989,12 +992,14 @@
                         <li class="menu-title"><span data-key="t-menu">Products</span></li>
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('product.dashboard.page') }}" class="nav-link" data-key="t-products">
+                                <a href="{{ route('product.dashboard.page') }}" class="nav-link"
+                                    data-key="t-products">
                                     Products </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('create.product') }}" class="nav-link" data-key="t-create-product"> Create Product
+                                <a href="{{ route('create.product') }}" class="nav-link" data-key="t-create-product">
+                                    Create Product
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -1010,7 +1015,8 @@
                                     Orders </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-order-details"> Order Details
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link" data-key="t-order-details">
+                                    Order Details
                                 </a>
                             </li>
                         </ul>
@@ -1280,7 +1286,8 @@
                                 <div class="form-check card-radio">
                                     <input class="form-check-input" type="radio" name="data-sidebar-visibility"
                                         id="sidebar-visibility-show" value="show">
-                                    <label class="form-check-label p-0 avatar-md w-100" for="sidebar-visibility-show">
+                                    <label class="form-check-label p-0 avatar-md w-100"
+                                        for="sidebar-visibility-show">
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0 p-1">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
@@ -1918,32 +1925,34 @@
     <!-- ecommerce product list -->
     <script src="../dashboardasset/js/pages/ecommerce-product-list.init.js"></script>
     <!-- ecommerce product list -->
-    <script src="../dashboardasset/js/pages/ecommerce-category-list.init.js"></script>
+    {{-- <script src="../dashboardasset/js/pages/ecommerce-category-list.init.js"></script> --}}
     <!-- App js -->
-     <!-- ckeditor -->
-     <script src="../dashboardasset/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+    <!-- ckeditor -->
+    <script src="../dashboardasset/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
 
-     <!-- dropzone js -->
-     <script src="../dashboardasset/libs/dropzone/dropzone-min.js"></script>
+    <!-- dropzone js -->
+    <script src="../dashboardasset/libs/dropzone/dropzone-min.js"></script>
 
-     <script src="../dashboardasset/js/pages/ecommerce-product-create.init.js"></script>
+    <script src="../dashboardasset/js/pages/ecommerce-product-create.init.js"></script>
 
     <script src="../dashboardasset/js/app.js"></script>
 </body>
 
 
 <!-- Mirrored from themesbrand.com/velzon/html/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Feb 2024 08:47:22 GMT -->
-    {{-- JQuery Link --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{-- JQuery Link --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Custom JS --}}
 
-<script src="{{ URL::asset('assets/js/custom/ajaxPost.js')}}"></script>
-<script src="{{ URL::asset('assets/js/custom/status-update.js')}}"></script>
-<script src="{{ URL::asset('assets/js/custom/form-upload.js')}}"></script>
-<script src="{{ URL::asset('assets/js/custom/image-preview.js')}}"></script>
-<script src="{{ URL::asset('assets/js/custom/pagination.js')}}"></script>
-<script src="{{ URL::asset('assets/js/custom/filemanager.js')}}"></script>
+<script src="{{ URL::asset('assets/js/custom/ajaxPost.js') }}"></script>
+<script src="{{ URL::asset('assets/js/custom/status-update.js') }}"></script>
+<script src="{{ URL::asset('assets/js/custom/form-upload.js') }}"></script>
+<script src="{{ URL::asset('assets/js/custom/image-preview.js') }}"></script>
+<script src="{{ URL::asset('assets/js/custom/pagination.js') }}"></script>
+<script src="{{ URL::asset('assets/js/custom/filemanager.js') }}"></script>
 
 @stack('scripts')
 

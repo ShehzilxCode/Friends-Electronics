@@ -38,8 +38,8 @@
                             name: "Product",
                             width: "360px",
                             data: function (e) {
-                                const imageUrl = e.main_image_path 
-                                    ? BASE_IMAGE_URL + e.main_image_path 
+                                const imageUrl = e.main_image_path
+                                    ? BASE_IMAGE_URL + e.main_image_path
                                     : BASE_IMAGE_URL + "default.png"; // Fallback to a default image
                                 return gridjs.html(
                                     '<div class="d-flex align-items-center"><div class="flex-shrink-0 me-3"><div class="avatar-sm bg-light rounded p-1"><img src="' +

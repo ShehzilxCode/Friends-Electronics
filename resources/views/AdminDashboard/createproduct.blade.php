@@ -142,7 +142,7 @@
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="stocks-input">SKU</label>
-                                                        <input type="text" name="productsku" class="form-control" id="stocks-input"
+                                                        <input type="number" name="productsku" class="form-control" id="stocks-input"
                                                             placeholder="SKU">
                                                         <div class="invalid-feedback">Please Enter a product stocks.</div>
                                                     </div>
@@ -152,7 +152,7 @@
                                                         <label class="form-label" for="product-price-input">Price</label>
                                                         <div class="input-group has-validation mb-3">
                                                             <span class="input-group-text" id="product-price-addon">$</span>
-                                                            <input name="productprice" type="text" class="form-control"
+                                                            <input name="productprice" type="number" class="form-control"
                                                                 id="product-price-input" placeholder="Enter price"
                                                                 aria-label="Price" aria-describedby="product-price-addon">
                                                             <div class="invalid-feedback">Please Enter a product price.
@@ -168,7 +168,7 @@
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text"
                                                                 id="product-discount-addon">%</span>
-                                                            <input type="text" name="productdiscount" class="form-control"
+                                                            <input type="number" name="productdiscount" class="form-control"
                                                                 id="product-discount-input" placeholder="Enter discount"
                                                                 aria-label="discount"
                                                                 aria-describedby="product-discount-addon">
@@ -178,9 +178,7 @@
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div class="mb-3">
                                                         <label class="form-label" for="orders-input">Total</label>
-                                                        <input name="productTotal" class="form-control" id="orders-input"
-                                                            placeholder="Orders">
-                                                        <div class="invalid-feedback">Please Enter a product orders.</div>
+                                                        <p id="total">/-</p>
                                                     </div>
                                                 </div>
                                                 <!-- end col -->
@@ -412,7 +410,7 @@
                                 <option value="`+ response.data[i]['id'] +`">` + response.data[i]['Category'] + `</option>
                                 `)
                             }
-                          
+
                         }
                     } else {
                         $('#categorydropdown').append('<option selected disabled >No Data</option>')
@@ -437,6 +435,27 @@ $(document).ready(function () {
         );
     });
 });
+
+// calculate total
+document.addEventListener("DOMContentLoaded", function () {
+    const priceInput = document.getElementById("product-price-input");
+    const discountInput = document.getElementById("product-discount-input");
+    const totalOutput = document.getElementById("total");
+
+    function calculateTotal() {
+        const price = parseFloat(priceInput.value) || 0;
+        const discount = parseFloat(discountInput.value) || 0;
+
+        const discountedPrice = price - (price * (discount / 100));
+
+        totalOutput.textContent = discountedPrice.toFixed(1) + "/-";
+    }
+
+    priceInput.addEventListener("keyup", calculateTotal);
+    discountInput.addEventListener("keyup", calculateTotal);
+});
+
+
 
     </script>
 @endpush

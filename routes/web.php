@@ -53,6 +53,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/update', 'updaterecord')->name('update.record'); //Update category
             Route::post('/destroy/{id}', 'deleterecord')->name('delete.record');
             Route::get('/categories/search',  'search')->name('categories.search');
+            Route::get('/categories', 'filter')->name('filter-category');
 
         });
     });

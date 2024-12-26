@@ -61,7 +61,7 @@
                                             <div class="row g-3">
                                                 <div class="col-sm-4">
                                                     <div class="">
-                                                        <input type="text" id="datepickerRange" class="form-control"
+                                                        <input type="date" id="datepickerRange" class="form-control"
                                                             placeholder="Select date">
                                                     </div>
                                                 </div>
@@ -71,8 +71,8 @@
                                                         <select id="statusFilter" class="form-control">
                                                             <option value="">Status</option>
                                                             <option value="all" selected>All</option>
-                                                            <option value="Active">Active</option>
-                                                            <option value="Block">Block</option>
+                                                            <option value="0">Active</option>
+                                                            <option value="1">Block</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -425,43 +425,35 @@
                     }
                 });
             }
-
-
-
+            //pagination
             function generatePagination(response) {
-                $('#pagination').empty(); // Clear existing pagination controls
-
+                $('#pagination').empty();
                 let currentPage = response.current_page;
                 let lastPage = response.last_page;
-
-                // Start of pagination wrap
                 $('#pagination').append(`
-        <div class="d-flex justify-content-end">
-            <div class="pagination-wrap hstack gap-2">
-                <a class="page-item pagination-prev ${currentPage === 1 ? 'disabled' : ''}"
-                   href="#" onclick="fetchdata(${currentPage - 1})">
-                   Previous
-                </a>
-                <ul class="pagination listjs-pagination mb-0" id="pagination-numbers"></ul>
-                <a class="page-item pagination-next ${currentPage === lastPage ? 'disabled' : ''}"
-                   href="#" onclick="fetchdata(${currentPage + 1})">
-                   Next
-                </a>
-            </div>
-        </div>
-    `);
-                // Add page numbers
+                    <div class="d-flex justify-content-end">
+                        <div class="pagination-wrap hstack gap-2">
+                            <a class="page-item pagination-prev ${currentPage === 1 ? 'disabled' : ''}"
+                                 href="#" onclick="fetchdata(${currentPage - 1})">
+                                 Previous
+                             </a>
+                     <ul class="pagination listjs-pagination mb-0" id="pagination-numbers"></ul>
+                         <a class="page-item pagination-next ${currentPage === lastPage ? 'disabled' : ''}"
+                            href="#" onclick="fetchdata(${currentPage + 1})">
+                            Next
+                         </a>
+                         </div>
+                    </div>
+                 `);
+
                 for (let i = 1; i <= lastPage; i++) {
                     $('#pagination-numbers').append(`
-            <li class="page-item ${i === currentPage ? 'active' : ''}">
-                <a class="page-link" href="#" onclick="fetchdata(${i})">${i}</a>
-            </li>
-        `);
+                          <li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="fetchdata(${i})">${i}</a>
+                         </li>
+                    `);
                 }
             }
-
-
-
             // update work
             function fetchCategoryDetails(categoryId) {
                 $.ajax({
@@ -617,7 +609,7 @@
             })
 
             // delete work end
-            // sorting
+            // search
             $(document).ready(function() {
                 $('#searchQuery').on('keyup', function() {
                     const query = $(this).val();
@@ -648,39 +640,35 @@
                                     });
 
                                     tableContent += `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${item.Category || 'N/A'}</td> <!-- Default value if name is undefined -->
-                                             <td>${formattedDate}</td>
-
- <td><span class="badge ${badgeClass} text-uppercase">${statusText}</span></td>
-   <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                    <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                        <a href="#updatemodal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn" onclick="fetchCategoryDetails(${item.id})">
-                                            <i class="ri-pencil-fill fs-16"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                        <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#delete-modal" onclick="getrecord(${item.id})">
-                                            <i class="ri-delete-bin-5-fill fs-16"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </td>
-                </tr>
-            `;
-                                });
+                                        <tr>
+                                             <td>${index + 1}</td>
+                                             <td>${item.Category || 'N/A'}</td>
+                                             <td><span class="badge ${badgeClass} text-uppercase">${statusText}</span></td>
+                                             <td>
+                                         <ul class="list-inline hstack gap-2 mb-0">
+                                             <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                 <a href="#updatemodal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn" onclick="fetchCategoryDetails(${item.id})">
+                                                     <i class="ri-pencil-fill fs-16"></i>
+                                                 </a>
+                                             </li>
+                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                 <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#delete-modal" onclick="getrecord(${item.id})">
+                                                     <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                 </a>
+                                             </li>
+                                        </ul>
+                                    </td>
+                                 </tr>`
+                                })
                             } else {
                                 tableContent = `
-            <tr>
-                <td colspan="5" class="text-center"><div class="py-4 text-center">
-                                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:72px;height:72px">
-                                                </lord-icon>
-                                                <h5 class="mt-4">Sorry! No Result Found</h5>
-                                            </div> </td>
-            </tr>
-        `;
+                                    <tr>
+                                        <td colspan="5" class="text-center"><div class="py-4 text-center">
+                                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#405189,secondary:#0ab39c" style="width:72px;height:72px">
+                                            </lord-icon>
+                                            <h5 class="mt-4">Sorry! No Result Found</h5>
+                                           </div> </td>
+                                    </tr>`
                             }
                             $('#tbody').html(tableContent);
                         },
@@ -688,6 +676,76 @@
                     });
                 });
             });
+            // sorting
+            $('#filterButton').on('click', function() {
+                const date = $('#datepickerRange').val();
+                const status = $('#statusFilter').val();
+
+                $.ajax({
+                    url: '{{ route('filter-category') }}',
+                    method: 'GET',
+                    data: {
+                        date: date,
+                        status: status
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        const tbody = $('#tbody');
+                        tbody.empty(); // Clear existing rows
+
+                        if (data.length > 0) {
+                            $.each(data, function(index, category) {
+                                let statusText = category.Status === 0 ? 'Active' :
+                                    'Inactive';
+                                let badgeClass = category.Status === 0 ?
+                                    'bg-success-subtle text-success' :
+                                    'bg-danger-subtle text-danger';
+                                let createdAt = new Date(category.created_at);
+                                let formattedDate = createdAt.toLocaleString('en-US', {
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    hour12: true
+                                });
+                                tbody.append(`
+                       <tr>
+                                             <td>${index + 1}</td>
+                                             <td>${category.Category || 'N/A'}</td>
+                                             <td>${formattedDate || 'N/A'}</td>
+                                             <td><span class="badge ${badgeClass} text-uppercase">${statusText}</span></td>
+                                             <td>
+                                         <ul class="list-inline hstack gap-2 mb-0">
+                                             <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                 <a href="#updatemodal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn" onclick="fetchCategoryDetails(${category.id})">
+                                                     <i class="ri-pencil-fill fs-16"></i>
+                                                 </a>
+                                             </li>
+                                             <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                 <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#delete-modal" onclick="getrecord(${category.id})">
+                                                     <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                 </a>
+                                             </li>
+                                        </ul>
+                                    </td>
+                                 </tr>
+                    `);
+                            });
+                        } else {
+                            tbody.append(`
+                    <tr>
+                        <td colspan="5" class="text-center">No categories found</td>
+                    </tr>
+                `);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
 
             fetchdata();
         </script>

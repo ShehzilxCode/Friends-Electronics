@@ -114,7 +114,20 @@ public function search(Request $request)
 }
 
 
-
+public function filter(Request $request)
+{
+    $filter = Category::query();
+    if ($request->has('date') && $request->date != '') {
+        $filter->whereDate('created_at', $request->date);
+    }
+    if ($request->has('status') && $request->status != '') {
+        if ($request->status != 'all') {
+            $filter->where('status', $request->status);
+        }
+    }
+    $categories = $filter->get();
+    return response()->json($categories);
+}
 
 
 }
