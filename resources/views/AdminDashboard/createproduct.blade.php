@@ -80,7 +80,7 @@
                                                 <p class="text-muted">Add Product Gallery Images.</p>
 
                                                 <div class="dropzone">
-                                                    <input type="file" name="file[]" multiple accept="image/*" required>  
+                                                    <input type="file" name="file[]" multiple accept="image/*" required>
                                                     <div class="dz-message needsclick">
                                                         <div class="mb-3">
                                                             <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
@@ -419,10 +419,10 @@
                 }
             })
         };
-        fetchdata(); 
+        fetchdata();
 
 
-    
+
 $(document).ready(function () {
     e.preventDefault();
 
@@ -449,5 +449,24 @@ document.querySelector("#product-image-input").addEventListener("change", functi
         );
         if (t) o.readAsDataURL(t);
     });
+
+    // total calculation
+    document.addEventListener("DOMContentLoaded", function () {
+    const priceInput = document.getElementById("product-price-input");
+    const discountInput = document.getElementById("product-discount-input");
+    const totalOutput = document.getElementById("total");
+
+    function calculateTotal() {
+        const price = parseFloat(priceInput.value) || 0;
+        const discount = parseFloat(discountInput.value) || 0;
+
+        const discountedPrice = price - (price * (discount / 100));
+
+        totalOutput.textContent = discountedPrice.toFixed(1) + "/-";
+    }
+
+    priceInput.addEventListener("keyup", calculateTotal);
+    discountInput.addEventListener("keyup", calculateTotal);
+});
     </script>
 @endpush
