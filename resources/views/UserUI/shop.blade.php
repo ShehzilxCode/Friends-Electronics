@@ -83,7 +83,7 @@
                                             </div>
                                             <div class="single-product__thumbnail--holder">
                                                 <a href="product-single.html">
-                                                    <img src="{{ asset($p->main_image_path) }}" alt="Product"
+                                                    <img src="{{ asset('storage/' . $p->main_image_path) }}" alt="Product"
                                                         width="344" height="370" />
                                                 </a>
                                             </div>
@@ -104,16 +104,23 @@
                                         </div>
                                         <div class="single-product__info text-center">
                                             <div class="single-product__info--tags">
-                                                <a href="#">Plant</a>
+                                                <a href="#">Tags</a>
                                             </div>
                                             <h3 class="single-product__info--title">
                                                 <a href="product-single.html">
-                                                    Viksberg planter
+                                                    {{ $p->name }}
                                                 </a>
                                             </h3>
+                                            @if($p->discount == "" || $p->discount == null)
+                                                <div class="single-product__info--price">
+                                                    {{-- <del>{{ $p->price }}</del> --}}
+                                                    <ins>{{ $p->price }}</ins>
+                                                </div>
+
+                                            @endif
                                             <div class="single-product__info--price">
-                                                <del>$39.99</del>
-                                                <ins>$29.99</ins>
+                                                <del>{{ $p->price }}</del>
+                                                <ins>{{ $p->Total }}</ins>
                                             </div>
                                         </div>
                                     </div>

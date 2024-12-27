@@ -18,9 +18,9 @@ class UserController extends Controller
         return view('UserUI.contact-us');
     }
 
-    public function shop(){
-        return view('UserUI.shop');
-    }
+    // public function shop(){
+    //     return view('UserUI.shop');
+    // }
 
     public function wishlist(){
         return view('UserUI.wishlist');

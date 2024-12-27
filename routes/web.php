@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController as FUserController;
 use App\Http\Controllers\User\UserController as UserController;
-use App\Http\Controllers\User\ProductController;
+use App\Http\Controllers\User\ProductController as UserProductController;
 
 //Admin Controllers
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -25,7 +25,6 @@ Route::controller(FUserController::class)->group(function () {
     Route::get('/', 'index')->name('user.home');               // Home Page
     Route::get('/about-us', 'about')->name('user.about');      // About Us Page
     Route::get('/contact-us', 'contact')->name('user.contact');// Contact Us Page
-    Route::get('/shop', 'shop')->name('user.shop');            // Shop Page
     Route::get('/wishlist', 'wishlist')->name('user.wishlist');// Wishlist Page
     Route::get('/cart', 'cart')->name('user.cart');            // Cart Page
     Route::get('/myaccount', 'myaccount')->name('user.myaccount'); // My Account Page
@@ -68,6 +67,9 @@ Route::prefix('admin')->group(function () {
 
 });
 
+Route::controller(UserProductController::class)->group(function () {
+    Route::get('/shop','fetchproduct')->name('user.shop');
+});
 
 //User Auth routes
 Route::controller(UserController::class)->prefix('users')->group(function (){
