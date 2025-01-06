@@ -313,6 +313,7 @@
         .catch((error) => {
             console.error("Error fetching product data:", error);
         });
+        
 searchProductList = document.getElementById("searchProductList"),
 slider =
     (searchProductList.addEventListener("keyup", function () {
@@ -424,7 +425,7 @@ Array.from(e).forEach(function (e) {
 }
 var checkboxes = document.querySelectorAll(".checkbox-wrapper-mail input");
 function removeItems() {
-document.getElementById("removeItemModal").addEventListener("show.bs.modal", function (e) {
+document.getElementById("removeItemModal").toArray().addEventListener("show.bs.modal", function (e) {
     (isSelected = 0),
         document.getElementById("delete-product").addEventListener("click", function () {
             Array.from(document.querySelectorAll(".gridjs-table tr")).forEach(function (e) {
