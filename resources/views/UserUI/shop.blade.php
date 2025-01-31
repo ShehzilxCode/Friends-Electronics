@@ -170,8 +170,6 @@
                                     </h4>
                                     <div class="sidebar-widget-item__filter category-filter">
                                         <ul class="sidebar-widget-item__list category" id="category-section">
-
-
                                         </ul>
                                     </div>
                                 </div>
@@ -387,42 +385,43 @@
 
 @push('scripts')
     <script>
-        function fetchdata() {
-            $.ajax({
-                url: '{{ route('categroy.fetch') }}',
-                type: 'get',
-                success: function(response) {
-                    console.log(response)
-                    if (response.data.length > 0) {
+    function fetchdata() {
+    $.ajax({
+        url: '{{ route('categroy.fetch') }}',
+        type: 'get',
+        success: function(response) {
+            console.log(response);
+            if (response.data.length > 0) {
+                $('#categorydropdown').append(`
+                    <option selected disabled>Choose Category</option>
+                `);
 
-                        $('#categorydropdown').append(`
-                                <option selected disabled>Choose Category</option>
-                            `)
-                        for (let i = 0; i < response.data.length; i++) {
-                            var status = response.data[i]['Status']
-                            console.log(status)
-                            if (status == 0) {
+                for (let i = 0; i < response.data.length; i++) {
+                    var status = response.data[i]['Status'];
+                    console.log(status);
+                    if (status == 0) {
+                        let categoryId = "category-" + response.data[i]['id']; // Unique ID using DB ID
 
-                                $('#category-section').append(`
-                                   <li>
-                                            <input type="checkbox" id="category-1" value="` + response.data[i]['id'] + `" />
-                                            <label for="category-1">
-                                                <span></span>` + response.data[i]['Category'] + `</label>
-                                        </li>
-
-                                `)
-                            }
-
-                        }
-                    } else {
-                        $('#category-section').append('<option selected disabled >No Data</option>')
+                        $('#category-section').append(`
+                            <li>
+                                <input type="checkbox" id="${categoryId}" value="${response.data[i]['id']}" />
+                                <label for="${categoryId}">
+                                    <span></span> ${response.data[i]['Category']}
+                                </label>
+                            </li>
+                        `);
                     }
-                },
-                error: function(e) {
-                    console.log(e.responseText)
                 }
-            })
-        };
+            } else {
+                $('#category-section').append('<li>No Data</li>');
+            }
+        },
+        error: function(e) {
+            console.log(e.responseText);
+        }
+    });
+}
+
         fetchdata();
     </script>
 @endpush
