@@ -6,9 +6,21 @@
         .catch(function (e) {
             console.error(e);
         });
-var dropzonePreviewNode = document.querySelector("#dropzone-preview-list"),
-    previewTemplate = ((dropzonePreviewNode.itemid = ""), dropzonePreviewNode.parentNode.innerHTML),
-    dropzone = (dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode), new Dropzone(".dropzone", { url: "https://httpbin.org/post", method: "post", previewTemplate: previewTemplate, previewsContainer: "#dropzone-preview" }));
+// Dropzone configuration
+var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
+var previewTemplate = dropzonePreviewNode.parentNode.innerHTML;
+dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
+
+var dropzone = new Dropzone(".dropzone", {
+    url: "https://httpbin.org/post",
+    method: "post",
+    previewTemplate: previewTemplate,
+    previewsContainer: "#dropzone-preview",
+    autoProcessQueue: false,
+    acceptedFiles: "image/*",
+});
+
+
 !(function () {
     "use strict";
     var e = document.querySelectorAll(".needs-validation"),

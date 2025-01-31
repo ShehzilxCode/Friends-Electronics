@@ -78,9 +78,8 @@
                                             <div id="product-images-dropzone">
                                                 <h5 class="fs-14 mb-1">Product Gallery</h5>
                                                 <p class="text-muted">Add Product Gallery Images.</p>
-
+                                                <input type="file" name="file[]" multiple accept="image/*" required>
                                                 <div class="dropzone">
-                                                    <input type="file" name="file[]" multiple accept="image/*" required>
                                                     <div class="dz-message needsclick">
                                                         <div class="mb-3">
                                                             <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
@@ -424,15 +423,17 @@
 
 
 $(document).ready(function () {
-    e.preventDefault();
+    $('#insert-product').on('submit', function(e){
+        e.preventDefault();
 
-    handleFormUploadForm(
-        'POST',
-        '#insert-product',
-        '#addproductbtn',
-        "{{ route('product.create') }}",
-        "{{ route('create.product') }}" // Redirection URL
-    );
+        handleFormUploadForm(
+            'POST',
+            '#insert-product',
+            '#addproductbtn',
+            "{{ route('product.create') }}",
+            "{{ route('create.product') }}" // Redirection URL
+        );
+    });
 });
 
 
